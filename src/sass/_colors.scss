@@ -1,7 +1,9 @@
 :root
 {
+    --no-theme-text: #eee;
     --text-shadow: #111;
-    --nav-background: #d77c00;
+    --main-color: #d77c00;
+    --header-bg: #141414;
     --nav-red: #992200;
     --nav-text: #eee;
     --footer-bg-1: #714433;
@@ -9,11 +11,13 @@
 }
 
 [data-mode='dark'] {
-    --header-bg: #141414;
-    --text: #eee;  
+    --text: #eee;
+    --background-color: #555;
+    --container-background: linear-gradient(#444 0%, #333 50%, #111 100%);
 }
 
 [data-mode='light'] {
-    --header-bg: #b2b2b2;
     --text: #111;
+    --background-color: #ddd;
+    --container-background: linear-gradient(#bbb 0%, #aaa 50%, #888 100%);
 }

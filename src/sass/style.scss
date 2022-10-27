@@ -11,6 +11,19 @@
 body {
 	font-family: sans-serif;
 	color: var(--text);
+	overflow-x: hidden;
+	background-color: var(--background-color);
+}
+
+.container
+{
+	margin: 0 auto;
+	padding: 2rem;
+	max-width: 1200px;
+	background-image: var(--container-background);
+	border: 5px ridge var(--main-color);
+	border-radius: 5px;
+	text-align: center;
 }
 
 .header {
@@ -33,11 +46,12 @@ body {
 
 	&__text {
 		font-size: 1.5rem;
+		color: var(--no-theme-text);
 	}
 
 	&__options-link {
 		padding: 0.5rem;
-		color: var(--text);
+		color: var(--no-theme-text);
 		font-size: 0.8rem;
 
 		.fa-solid {
@@ -48,7 +62,7 @@ body {
 
 .nav {
 	width: 100vw;
-	background-color: var(--nav-background);
+	background-color: var(--main-color);
 
 	&__items {
 		display: flex;
@@ -73,14 +87,13 @@ body {
 		position: relative;
 		height: 4rem;
 		border-right: 4px ridge var(--nav-red);
-		opacity: .75;
+		opacity: 0.75;
 
 		&--last {
 			border: none;
 		}
 
-		.fa-solid
-		{
+		.fa-solid {
 			padding: 5px;
 		}
 	}
@@ -97,7 +110,7 @@ body {
 	&__item-down {
 		display: block;
 		padding: 0.8rem 0.5rem;
-		background-color: var(--nav-background);
+		background-color: var(--main-color);
 		border-bottom: 4px ridge var(--nav-red);
 
 		&--last {
@@ -109,8 +122,7 @@ body {
 		background-color: var(--nav-red);
 	}
 
-	&__mobile
-	{
+	&__mobile {
 		display: none;
 	}
 }
@@ -119,49 +131,86 @@ body {
 	display: block;
 }
 
-.menu-item-active
-{
+.menu-item-active {
 	font-weight: bold;
 	text-shadow: 1px 1px 5px var(--text-shadow);
 	opacity: 1;
 }
 
-.footer
+.main
 {
-	position: fixed;
+	margin: 3rem 0;
+
+	&__heading, &__photo
+	{
+		margin-bottom: 2rem;
+	}
+
+	&__heading
+	{
+		color: var(--main-color);
+	}
+
+	&__photo
+	{
+		display: inline-block;
+		position: relative;
+	}
+	
+	&__photo-text
+	{
+		position: absolute;
+		bottom: 4px;
+		padding: 2rem;
+		width: 100%;
+		background-color: rgba(0, 0, 0, .5);
+		opacity: 0;
+		transition: opacity .5s;
+	}
+
+	&__photo:hover &__photo-text
+	{
+		opacity: 1;
+	}
+
+	&__info
+	{
+		line-height: 1.5rem;
+
+		.executive
+		{
+			font-weight: bold;
+		}
+	}
+}
+
+.footer {
+	position: relative;
 	bottom: 0;
 	width: 100vw;
 	font-size: 0.9rem;
 	text-align: center;
 
-	&__facebook, &__owner
-	{
+	&__facebook,
+	&__owner {
 		display: flex;
 		flex-direction: column;
-		padding: 1rem;
+		padding: 1.5rem;
 	}
-	
-	&__facebook
-	{
+
+	&__facebook {
 		background-color: var(--footer-bg-1);
 
-		.fa-brands
-		{
-			margin-top: .8rem;
+		.fa-brands {
+			margin-top: 0.8rem;
 			font-size: 3rem;
 			color: #4267b2;
 			cursor: pointer;
 		}
 	}
 
-	&__owner
-	{
+	&__owner {
 		background-color: var(--footer-bg-2);
-
-		.author
-		{
-			margin-top: 0.8rem;
-		}
 	}
 }
 
