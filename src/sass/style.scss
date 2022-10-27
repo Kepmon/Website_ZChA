@@ -1,0 +1,169 @@
+@use 'colors' as c;
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
+}
+
+body {
+	font-family: sans-serif;
+	color: var(--text);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem 1rem;
+	width: 100vw;
+	background-color: var(--header-bg);
+
+	&__logo {
+		display: flex;
+		align-items: center;
+	}
+
+	&__image {
+		margin-right: 1rem;
+		height: 3rem;
+	}
+
+	&__text {
+		font-size: 1.5rem;
+	}
+
+	&__options-link {
+		padding: 0.5rem;
+		color: var(--text);
+		font-size: 0.8rem;
+
+		.fa-solid {
+			margin-right: 0.5rem;
+		}
+	}
+}
+
+.nav {
+	width: 100vw;
+	background-color: var(--nav-background);
+
+	&__items {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+		max-width: 1200px;
+	}
+
+	&__item-main,
+	&__item-down {
+		width: 11vw;
+		text-align: center;
+		color: var(--nav-text);
+		transition: background-color 0.3s;
+	}
+
+	&__item-main {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		height: 4rem;
+		border-right: 4px ridge var(--nav-red);
+		opacity: .75;
+
+		&--last {
+			border: none;
+		}
+
+		.fa-solid
+		{
+			padding: 5px;
+		}
+	}
+
+	&__item-main:hover {
+		background-color: var(--nav-red);
+	}
+
+	&__items-down {
+		display: none;
+		position: absolute;
+	}
+
+	&__item-down {
+		display: block;
+		padding: 0.8rem 0.5rem;
+		background-color: var(--nav-background);
+		border-bottom: 4px ridge var(--nav-red);
+
+		&--last {
+			border: none;
+		}
+	}
+
+	&__item-down:hover {
+		background-color: var(--nav-red);
+	}
+
+	&__mobile
+	{
+		display: none;
+	}
+}
+
+.nav-active {
+	display: block;
+}
+
+.menu-item-active
+{
+	font-weight: bold;
+	text-shadow: 1px 1px 5px var(--text-shadow);
+	opacity: 1;
+}
+
+.footer
+{
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	font-size: 0.9rem;
+	text-align: center;
+
+	&__facebook, &__owner
+	{
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+	}
+	
+	&__facebook
+	{
+		background-color: var(--footer-bg-1);
+
+		.fa-brands
+		{
+			margin-top: .8rem;
+			font-size: 3rem;
+			color: #4267b2;
+			cursor: pointer;
+		}
+	}
+
+	&__owner
+	{
+		background-color: var(--footer-bg-2);
+
+		.author
+		{
+			margin-top: 0.8rem;
+		}
+	}
+}
+
+@import 'small';
+@import 'medium';

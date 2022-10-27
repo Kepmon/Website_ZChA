@@ -1,0 +1,107 @@
+@media (max-width: 768px) {
+	.header {
+		flex-direction: column;
+
+		&__logo {
+			text-align: center;
+		}
+
+		&__image {
+			display: block;
+			margin: 0 auto;
+			height: 2rem;
+		}
+
+		&__text {
+			margin-left: 0.5rem;
+			font-size: 1rem;
+		}
+
+		&__options {
+			display: flex;
+			margin-top: 1rem;
+		}
+
+		&__options-link {
+			font-size: 0.6rem;
+		}
+	}
+
+	.nav {
+		&__items {
+			display: none;
+		}
+
+		&__mobile {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+			padding: 1.5rem 0 .5rem;
+		}
+
+		&__burger {
+			color: var(--nav-text);
+			cursor: pointer;
+		}
+
+		&__mobile-items {
+			padding-top: 1rem;
+			max-height: 0;
+			text-align: center;
+			overflow: hidden;
+			transition: max-height .5s;
+		}
+
+		&__mobile-main,
+		&__mobile-down {
+			color: var(--nav-text);
+			line-height: 2rem;
+		}
+
+		&__mobile-main
+		{
+			opacity: .75;
+		}
+
+		&__mobile-items-down
+		{
+			padding: 0 1rem;
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height .5s;
+			background-color: var(--nav-red);
+			border-radius: 5px;
+		}
+	}
+
+	.nav-mobile-active {
+		max-height: 50vh;
+	}
+
+	.mobile-down-active
+	{
+		max-height: 8rem;
+	}
+
+	.footer
+	{
+		font-size: .7rem;
+
+		&__facebook, &__owner
+		{
+			padding: 0.8rem;
+		}
+
+		.fa-brands
+		{
+			margin-top: .5rem;
+			font-size: 2.5rem;
+		}
+
+		.author
+		{
+			margin-top: 0.5rem;
+		}
+	}
+}

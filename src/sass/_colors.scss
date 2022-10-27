@@ -1,0 +1,19 @@
+:root
+{
+    --text-shadow: #111;
+    --nav-background: #d77c00;
+    --nav-red: #992200;
+    --nav-text: #eee;
+    --footer-bg-1: #714433;
+    --footer-bg-2: #412525;
+}
+
+[data-mode='dark'] {
+    --header-bg: #141414;
+    --text: #eee;  
+}
+
+[data-mode='light'] {
+    --header-bg: #b2b2b2;
+    --text: #111;
+}
