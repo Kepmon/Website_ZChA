@@ -11,26 +11,30 @@
 body {
 	font-family: sans-serif;
 	color: var(--text);
-	overflow-x: hidden;
 	background-color: var(--background-color);
+	overflow-x: hidden;
 }
 
-.container
-{
+.container {
 	margin: 0 auto;
 	padding: 2rem;
 	max-width: 1200px;
 	background-image: var(--container-background);
 	border: 5px ridge var(--main-color);
-	border-radius: 5px;
+	border-radius: 8px;
 	text-align: center;
+}
+
+.main-heading {
+	margin-bottom: 2rem;
+	color: var(--main-color);
 }
 
 .header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2rem 1rem;
+	padding: 2rem;
 	width: 100vw;
 	background-color: var(--header-bg);
 
@@ -137,59 +141,54 @@ body {
 	opacity: 1;
 }
 
-.main
-{
+.main {
 	margin: 3rem 0;
 
-	&__heading, &__photo
-	{
+	&__photo {
+		display: inline-block;
+		position: relative;
 		margin-bottom: 2rem;
 	}
 
-	&__heading
+	&__photo-image
 	{
-		color: var(--main-color);
+		width: 45vw;
 	}
 
-	&__photo
-	{
-		display: inline-block;
-		position: relative;
-	}
-	
-	&__photo-text
-	{
+	&__photo-text {
 		position: absolute;
 		bottom: 4px;
 		padding: 2rem;
 		width: 100%;
-		background-color: rgba(0, 0, 0, .5);
+		background-color: rgba(0, 0, 0, 0.5);
+		color: var(--no-theme-text);
 		opacity: 0;
-		transition: opacity .5s;
+		transition: opacity 0.3s;
 	}
 
-	&__photo:hover &__photo-text
-	{
+	&__photo:hover &__photo-text {
 		opacity: 1;
 	}
 
-	&__info
-	{
-		line-height: 1.5rem;
+	&__info {
+		line-height: 2rem;
 
-		.executive
-		{
+		.executive {
 			font-weight: bold;
 		}
+	}
+
+	&__info-first
+	{
+		margin-bottom: 1rem;
 	}
 }
 
 .footer {
-	position: relative;
-	bottom: 0;
 	width: 100vw;
 	font-size: 0.9rem;
 	text-align: center;
+	color: var(--no-theme-text);
 
 	&__facebook,
 	&__owner {

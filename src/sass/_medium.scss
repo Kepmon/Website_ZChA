@@ -13,4 +13,12 @@
     {
         font-size: .75rem;
     }
+
+    .main {
+    
+        &__photo-image
+        {
+            width: 55vw;
+        }
+    }
 }
