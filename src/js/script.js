@@ -12,7 +12,9 @@ const navItemsDown = document.querySelectorAll('.nav__item-down');
 const navItemsMobileMain = Array.from(
 	document.querySelectorAll('.mobile-down')
 );
-const allMobileItemsMain = Array.from(document.querySelectorAll('.nav__mobile-main'))
+const allMobileItemsMain = Array.from(
+	document.querySelectorAll('.nav__mobile-main')
+);
 const ulItemsMobileDown = Array.from(
 	document.querySelectorAll('.nav__mobile-items-down')
 );
@@ -42,31 +44,28 @@ for (let i = 0; i < navItemsMain.length; i++) {
 	navItemsMain[i].addEventListener('click', showItemsDown);
 }
 
-for (let i = 0; i < allNavItemsMain.length; i++) {
-	const highlightNavMain = () => {
-		switch (true) {
-			case main.classList.contains('home'):
-				allNavItemsMain[0].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('courses'):
-				allNavItemsMain[1].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('speciality'):
-				allNavItemsMain[2].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('staff'):
-				allNavItemsMain[3].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('research'):
-				allNavItemsMain[4].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('labs'):
-				allNavItemsMain[5].classList.add('menu-item-active');
-				break;
-		}
-	};
-	window.addEventListener('DOMContentLoaded', highlightNavMain);
-}
+const highlightNavMain = () => {
+	switch (true) {
+		case main.classList.contains('home'):
+			allNavItemsMain[0].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('courses'):
+			allNavItemsMain[1].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('speciality'):
+			allNavItemsMain[2].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('staff'):
+			allNavItemsMain[3].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('research'):
+			allNavItemsMain[4].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('labs'):
+			allNavItemsMain[5].classList.add('menu-item-active');
+			break;
+	}
+};
 
 const removeItemsDown = (e) => {
 	if (e.target !== navItems && allNavItemsMain.indexOf(e.target) === -1) {
@@ -93,33 +92,28 @@ for (let i = 0; i < navItemsMobileMain.length; i++) {
 const showMobileItems = () =>
 	navMobileItems.classList.toggle('nav-mobile-active');
 
-for (let i = 0; i < allMobileItemsMain.length; i++) {
-	const highlightMobileMain = () => {
-
-		switch (true) {
-			case main.classList.contains('home'):
-				console.log('true');
-				allMobileItemsMain[0].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('courses'):
-				allMobileItemsMain[1].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('speciality'):
-				allMobileItemsMain[2].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('staff'):
-				allMobileItemsMain[3].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('research'):
-				allMobileItemsMain[4].classList.add('menu-item-active');
-				break;
-			case main.classList.contains('labs'):
-				allMobileItemsMain[5].classList.add('menu-item-active');
-				break;
-		}
-	};
-	window.addEventListener('DOMContentLoaded', highlightMobileMain);
-}
+const highlightMobileMain = () => {
+	switch (true) {
+		case main.classList.contains('home'):
+			allMobileItemsMain[0].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('courses'):
+			allMobileItemsMain[1].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('speciality'):
+			allMobileItemsMain[2].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('staff'):
+			allMobileItemsMain[3].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('research'):
+			allMobileItemsMain[4].classList.add('menu-item-active');
+			break;
+		case main.classList.contains('labs'):
+			allMobileItemsMain[5].classList.add('menu-item-active');
+			break;
+	}
+};
 
 const removeMobileItemsDown = () => {
 	if (navMobileItems.classList.contains('nav-mobile-active')) {
@@ -140,4 +134,6 @@ themeLink.addEventListener('click', changeTheme);
 window.addEventListener('click', removeItemsDown);
 navBurger.addEventListener('click', showMobileItems);
 navBurger.addEventListener('click', removeMobileItemsDown);
+window.addEventListener('DOMContentLoaded', highlightNavMain);
+window.addEventListener('DOMContentLoaded', highlightMobileMain);
 window.addEventListener('DOMContentLoaded', displayYear);
