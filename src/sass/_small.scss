@@ -1,31 +1,10 @@
-@media (max-width: 575px)
-{
-	.container
-	{
-		padding: 2rem 1rem;
-	}	
-
-	.main {
-		&__photo-image
-		{
-			width: 50vw;
-		}
-
-		&__photo-text {
-			bottom: 3px;
-			padding: .5rem;
-		}
-
-		&__info {
-			line-height: 1.7rem;
-		}
-    }
-}
-
 @media (max-width: 768px) {
-	.main-heading
-	{
+	.main-heading {
 		font-size: 1.5rem;
+	}
+
+	.second-heading {
+		font-size: 1.1rem;
 	}
 
 	.header {
@@ -66,7 +45,7 @@
 			flex-direction: column;
 			align-items: center;
 			position: relative;
-			padding: 1.5rem 0 .5rem;
+			padding: 1.5rem 0 0.5rem;
 		}
 
 		&__burger {
@@ -74,8 +53,8 @@
 			cursor: pointer;
 		}
 
-		&__mobile-items, &__mobile-items-down
-		{
+		&__mobile-items,
+		&__mobile-items-down {
 			list-style: none;
 		}
 
@@ -84,7 +63,7 @@
 			max-height: 0;
 			text-align: center;
 			overflow: hidden;
-			transition: max-height .5s;
+			transition: max-height 0.5s;
 		}
 
 		&__mobile-main,
@@ -93,17 +72,15 @@
 			line-height: 2rem;
 		}
 
-		&__mobile-main
-		{
-			opacity: .75;
+		&__mobile-main {
+			opacity: 0.75;
 		}
 
-		&__mobile-items-down
-		{
+		&__mobile-items-down {
 			padding: 0 1rem;
 			max-height: 0;
 			overflow: hidden;
-			transition: max-height .5s;
+			transition: max-height 0.5s;
 			background-color: var(--nav-red);
 			border-radius: 5px;
 		}
@@ -113,42 +90,70 @@
 		max-height: 50vh;
 	}
 
-	.mobile-down-active
-	{
+	.mobile-down-active {
 		max-height: 8rem;
 	}
 
 	.main {
-    
-        &__photo-image
-        {
-            width: 60vw;
-        }
+		&__photo-image {
+			width: 60vw;
+		}
 
-		&__photo-text, &__info
-		{
+		&__photo-text,
+		&__info {
 			font-size: 0.8rem;
 		}
-    }
 
-	.footer
-	{
-		font-size: .7rem;
+		.research {
+			font-size: .9rem;
+		}
+	}
 
-		&__facebook, &__owner
-		{
+	.footer {
+		font-size: 0.7rem;
+
+		&__facebook,
+		&__owner {
 			padding: 0.8rem;
 		}
 
-		.fa-brands
-		{
-			margin-top: .5rem;
+		.fa-brands {
+			margin-top: 0.5rem;
 			font-size: 2.5rem;
 		}
 
-		.author
-		{
+		.author {
 			margin-top: 0.5rem;
+		}
+	}
+}
+
+@media (max-width: 575px) {
+	.container {
+		padding: 2rem 1rem;
+	}
+
+	.second-heading {
+		font-size: 1rem;
+	}
+
+	.main {
+		&__photo-image {
+			width: 65vw;
+		}
+
+		&__photo-text {
+			bottom: 3px;
+			padding: 0.5rem;
+		}
+
+		&__info {
+			line-height: 1.7rem;
+		}
+
+		.research {
+			font-size: 0.8rem;
+			text-align: center;
 		}
 	}
 }
