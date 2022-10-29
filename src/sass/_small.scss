@@ -105,7 +105,7 @@
 		}
 
 		.research {
-			font-size: .9rem;
+			font-size: 0.9rem;
 		}
 	}
 
@@ -133,6 +133,10 @@
 		padding: 2rem 1rem;
 	}
 
+	.main-heading {
+		font-size: 1.3rem;
+	}
+
 	.second-heading {
 		font-size: 1rem;
 	}
@@ -151,9 +155,22 @@
 			line-height: 1.7rem;
 		}
 
-		.research {
+		.research,
+		.labs {
 			font-size: 0.8rem;
+		}
+
+		.research {
 			text-align: center;
+		}
+
+		.labs {
+			text-align: center;
+
+			&__subitems, &__subitems:last-child {
+				margin-left: 0;
+				font-size: 0.7rem;
+			}
 		}
 	}
 }

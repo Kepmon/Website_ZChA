@@ -195,21 +195,32 @@ body {
 	}
 	// end of home page
 
-	// research section
+	.research, .labs
+	{
+		list-style: none;
+	}
+
+	// research and labs sections
 	.analchem, .metallurgy
 	{
+		padding: 1rem;
+		border-radius: 8px;
 		text-align: justify;
 	}
 
 	.analchem
 	{
 		margin-bottom: 2rem;
+		background-color: var(--analchem-color);
 	}
 
-	.research
+	.metallurgy
 	{
-		list-style: none;
+		background-color: var(--metallurgy-color);
+	}
 
+	.research, .labs
+	{
 		&__item
 		{
 			margin-bottom: 1rem;
@@ -221,22 +232,31 @@ body {
 		}
 	}
 
-	.analchem, .metallurgy
+	.labs
 	{
-		padding: 1rem;
-		border-radius: 8px;
-	}
+		&__bold
+		{
+			font-weight: bold;
+		}
 
-	.analchem
-	{
-		background-color: var(--analchem-color);
-	}
+		&__subitems
+		{
+			margin: .5rem 0 1rem 2rem;
+			list-style: inside;
+			font-size: 0.9rem;
+		}
 
-	.metallurgy
-	{
-		background-color: var(--metallurgy-color);
+		&__subitems:last-child
+		{
+			margin: .5rem 0 0 2rem;
+		}
+
+		&__subitem
+		{
+			margin-bottom: 0.3rem;
+		}
 	}
-	// end of research section
+	// end of research and labs sections
 }
 
 .footer {
