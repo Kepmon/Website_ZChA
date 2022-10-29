@@ -20,6 +20,9 @@ const ulItemsMobileDown = Array.from(
 );
 const navBurger = document.querySelector('.nav__burger');
 const navMobileItems = document.querySelector('.nav__mobile-items');
+const specialityImg = document.querySelector('.speciality-photo');
+const specialityEnlarge = document.querySelector('.fa-magnifying-glass-plus');
+const specialityClose = document.querySelector('.speciality-closing-info');
 const year = document.querySelector('.year');
 
 const changeTheme = () => {
@@ -125,6 +128,18 @@ const removeMobileItemsDown = () => {
 	}
 };
 
+const enlargeImg = () => {
+	specialityImg.classList.add('speciality-enlarge');
+	specialityEnlarge.style.display = 'none';
+	specialityClose.style.display = 'block';
+};
+
+const closeImg = () => {
+	specialityImg.classList.remove('speciality-enlarge');
+	specialityEnlarge.style.display = 'block';
+	specialityClose.style.display = 'none';
+};
+
 const displayYear = () => {
 	const getYear = new Date();
 	year.textContent = getYear.getFullYear();
@@ -136,4 +151,6 @@ navBurger.addEventListener('click', showMobileItems);
 navBurger.addEventListener('click', removeMobileItemsDown);
 window.addEventListener('DOMContentLoaded', highlightNavMain);
 window.addEventListener('DOMContentLoaded', highlightMobileMain);
+specialityEnlarge.addEventListener('click', enlargeImg);
+specialityImg.addEventListener('click', closeImg);
 window.addEventListener('DOMContentLoaded', displayYear);

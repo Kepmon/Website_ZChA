@@ -21,16 +21,17 @@ body {
 	background-image: var(--container-background);
 	border: 5px ridge var(--main-color);
 	border-radius: 8px;
-	text-align: center;
+	text-align: justify;
+	line-height: 1.3rem;
 }
 
 .main-heading {
 	margin-bottom: 2rem;
 	color: var(--main-color);
+	text-align: center;
 }
 
-.second-heading
-{
+.second-heading {
 	margin-bottom: 1rem;
 	text-align: center;
 	font-size: 1.3rem;
@@ -74,8 +75,8 @@ body {
 	width: 100vw;
 	background-color: var(--main-color);
 
-	&__items, &__items-down
-	{
+	&__items,
+	&__items-down {
 		list-style: none;
 		z-index: 10;
 	}
@@ -153,6 +154,10 @@ body {
 	opacity: 1;
 }
 
+.centered {
+	text-align: center;
+}
+
 .main {
 	margin: 3rem 0;
 
@@ -195,68 +200,127 @@ body {
 	}
 	// end of home page
 
-	.research, .labs
-	{
+	.research,
+	.labs {
 		list-style: none;
 	}
 
 	// research and labs sections
-	.analchem, .metallurgy
-	{
+	.analchem,
+	.metallurgy {
 		padding: 1rem;
 		border-radius: 8px;
-		text-align: justify;
 	}
 
-	.analchem
-	{
+	.analchem {
 		margin-bottom: 2rem;
 		background-color: var(--analchem-color);
 	}
 
-	.metallurgy
-	{
+	.metallurgy {
 		background-color: var(--metallurgy-color);
 	}
 
-	.research, .labs
-	{
-		&__item
-		{
+	.research,
+	.labs {
+		&__item {
 			margin-bottom: 1rem;
 		}
 
-		&__item:last-child
-		{
+		&__item:last-child {
 			margin-bottom: 0;
 		}
 	}
 
-	.labs
-	{
-		&__bold
-		{
+	.labs {
+		&__bold {
 			font-weight: bold;
 		}
 
-		&__subitems
-		{
-			margin: .5rem 0 1rem 2rem;
+		&__subitems {
+			margin: 0.5rem 0 1rem 2rem;
 			list-style: inside;
 			font-size: 0.9rem;
 		}
 
-		&__subitems:last-child
-		{
-			margin: .5rem 0 0 2rem;
+		&__subitems:last-child {
+			margin: 0.5rem 0 0 2rem;
 		}
 
-		&__subitem
-		{
+		&__subitem {
 			margin-bottom: 0.3rem;
 		}
 	}
 	// end of research and labs sections
+
+	// speciality page
+	.speciality-basic {
+		text-align: center;
+		font-size: 1.1rem;
+		font-weight: bold;
+	}
+
+	.speciality-info {
+		margin-top: 1rem;
+	}
+
+	.speciality-info:first-of-type {
+		margin-top: 0;
+	}
+
+	.speciality-info:last-of-type {
+		margin-bottom: 2rem;
+	}
+
+	.speciality-list {
+		list-style: inside;
+	}
+
+	.speciality-more-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.speciality-img {
+			position: relative;
+			text-align: center;
+		}
+
+		.speciality-photo
+		{
+			width: 50%;
+		}
+
+		.fa-solid, .speciality-closing-info
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: rgba(0, 0, 0, 0.5);
+			
+		}
+
+		.fa-solid
+		{
+			padding: 1rem;
+			font-size: 4rem;
+			cursor: pointer;
+		}
+
+		.speciality-closing-info
+		{
+			display: none;
+			top: calc(50% - 1vh);
+			font-size: 1.2rem;
+		}
+
+		.speciality-enlarge
+		{
+			width: 100%;
+		}
+	}
+	// end of speciality page
 }
 
 .footer {
