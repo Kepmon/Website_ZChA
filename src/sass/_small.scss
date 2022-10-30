@@ -107,6 +107,17 @@
 		.research {
 			font-size: 0.9rem;
 		}
+
+		.speciality-basic
+		{
+			font-size: 1.1rem;
+		}
+
+		.speciality-more-info {
+            .speciality-closing-info {
+                font-size: .65rem;
+            }
+        }
 	}
 
 	.footer {
@@ -172,5 +183,20 @@
 				font-size: 0.7rem;
 			}
 		}
+
+		.speciality-basic
+		{
+			font-size: 1rem;
+		}
+
+		.speciality-info, .speciality-list {
+			text-align: center;
+		}
+
+		.speciality-more-info {
+            .speciality-closing-info {
+                font-size: .5rem;
+            }
+        }
 	}
 }

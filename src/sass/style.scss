@@ -29,6 +29,7 @@ body {
 	margin-bottom: 2rem;
 	color: var(--main-color);
 	text-align: center;
+	line-height: 2rem;
 }
 
 .second-heading {
@@ -264,16 +265,12 @@ body {
 		margin-top: 1rem;
 	}
 
-	.speciality-info:first-of-type {
-		margin-top: 0;
-	}
-
-	.speciality-info:last-of-type {
-		margin-bottom: 2rem;
-	}
-
 	.speciality-list {
 		list-style: inside;
+	}
+	
+	.speciality-list:last-of-type {
+		margin-bottom: 2rem;
 	}
 
 	.speciality-more-info {
@@ -286,37 +283,34 @@ body {
 			text-align: center;
 		}
 
-		.speciality-photo
-		{
+		.speciality-photo {
 			width: 50%;
+			transition: width .5s;
 		}
 
-		.fa-solid, .speciality-closing-info
-		{
+		.fa-solid,
+		.speciality-closing-info {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			color: rgba(0, 0, 0, 0.5);
-			
 		}
 
-		.fa-solid
-		{
+		.fa-solid {
 			padding: 1rem;
 			font-size: 4rem;
 			cursor: pointer;
 		}
 
-		.speciality-closing-info
-		{
+		.speciality-closing-info {
 			display: none;
 			top: calc(50% - 1vh);
 			font-size: 1.2rem;
+			cursor: default;
 		}
 
-		.speciality-enlarge
-		{
+		.speciality-enlarge {
 			width: 100%;
 		}
 	}
