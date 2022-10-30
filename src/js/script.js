@@ -19,6 +19,8 @@ const navMobileItems = document.querySelector('.nav__mobile-items')
 const specialityImg = document.querySelector('.speciality-photo')
 const specialityEnlarge = document.querySelector('.fa-magnifying-glass-plus')
 const specialityClose = document.querySelector('.speciality-closing-info')
+const coursesTitle = document.querySelectorAll('.courses__title')
+const coursesContent = document.querySelectorAll('.courses__content')
 const year = document.querySelector('.year')
 
 const changeTheme = () => {
@@ -134,6 +136,13 @@ const closeImg = () => {
 	specialityEnlarge.style.display = 'block'
 	specialityClose.style.display = 'none'
 	specialityImg.classList.remove('speciality-enlarge')
+}
+
+for (let i=0; i<coursesTitle.length; i++)
+{
+	const showCoursesContent = () => coursesContent[i].classList.toggle('courses-visible')
+
+	coursesTitle[i].addEventListener('click', showCoursesContent)
 }
 
 const displayYear = () => {

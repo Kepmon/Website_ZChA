@@ -38,6 +38,11 @@ body {
 	font-size: 1.3rem;
 }
 
+a
+{
+	color: var(--text);
+}
+
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -315,6 +320,108 @@ body {
 		}
 	}
 	// end of speciality page
+
+	// courses page
+	.courses
+	{
+		&__title, &__content-box
+		{
+			padding: 1rem;
+			background-color: var(--main-color);
+			border: 5px ridge var(--nav-red);
+			border-radius: 10px;
+		}
+
+		&__title
+		{
+			text-align: center;
+			cursor: pointer;
+		}
+
+		&__content
+		{
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height .5s;
+		}
+
+		&__heading
+		{
+			margin-top: 1rem;
+			font-size: 1.2rem;
+		}
+
+		&__heading:first-of-type
+		{
+			margin-top: 0;
+		}
+
+		&__subheading
+		{
+			margin-top: 1rem;
+		}
+
+		&__lectures
+		{
+			margin-top: 1rem;
+		}
+
+		&__item
+		{
+			list-style: none;
+		}
+
+		&__link
+		{
+			transition: color .5s;
+		}
+
+		&__link:hover
+		{
+			color: var(--nav-red);
+		}
+
+		&__calculate-grade
+		{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		&__calculator
+		{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 1rem;
+			padding: 1.5rem;
+			width: 25%;
+			border-radius: 10px;
+			background-image: var(--calculator-background);
+		}
+
+		&__calculator-grade
+		{
+			margin-bottom: 1rem;
+			width: 70%;
+			text-align: center;
+			border-radius: 5px;
+		}
+
+		&__calculator-button
+		{
+			margin-top: 1rem;
+			padding: .5rem 3rem;
+			border: none;
+			border-radius: 5px;
+		}
+	}
+
+	.courses-visible
+	{
+		max-height: 200vh;
+	}
+	// end of courses page
 }
 
 .footer {
