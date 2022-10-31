@@ -21,7 +21,13 @@ const specialityEnlarge = document.querySelector('.fa-magnifying-glass-plus')
 const specialityClose = document.querySelector('.speciality-closing-info')
 const coursesTitle = document.querySelectorAll('.courses__title')
 const coursesContent = document.querySelectorAll('.courses__content')
+const inputValues = document.querySelectorAll('.courses__calculator-grade')
+const calculateButton = document.querySelector('.courses__calculator-button')
+const gradeResult = document.querySelector('.courses__result')
+const gradeResultInfo = document.querySelector('.courses__calculator-result')
 const year = document.querySelector('.year')
+
+const inputNumbersArr = []
 
 const changeTheme = () => {
 	if (body.getAttribute('data-mode') === 'dark') {
@@ -126,23 +132,56 @@ const removeMobileItemsDown = () => {
 	}
 }
 
-const enlargeImg = () => {
-	specialityEnlarge.style.display = 'none'
-	specialityClose.style.display = 'block'
-	specialityImg.classList.add('speciality-enlarge')
+if (
+	specialityEnlarge !== null &&
+	specialityClose !== null &&
+	specialityImg !== null
+) {
+	const enlargeImg = () => {
+		specialityEnlarge.style.display = 'none'
+		specialityClose.style.display = 'block'
+		specialityImg.classList.add('speciality-enlarge')
+	}
+
+	const closeImg = () => {
+		specialityEnlarge.style.display = 'block'
+		specialityClose.style.display = 'none'
+		specialityImg.classList.remove('speciality-enlarge')
+	}
+
+	specialityEnlarge.addEventListener('click', enlargeImg)
+	specialityImg.addEventListener('click', closeImg)
+	specialityClose.addEventListener('click', closeImg)
 }
 
-const closeImg = () => {
-	specialityEnlarge.style.display = 'block'
-	specialityClose.style.display = 'none'
-	specialityImg.classList.remove('speciality-enlarge')
-}
-
-for (let i=0; i<coursesTitle.length; i++)
-{
-	const showCoursesContent = () => coursesContent[i].classList.toggle('courses-visible')
+for (let i = 0; i < coursesTitle.length; i++) {
+	const showCoursesContent = () =>
+		coursesContent[i].classList.toggle('courses-visible')
 
 	coursesTitle[i].addEventListener('click', showCoursesContent)
+}
+
+const calculateGrade = () => {
+	inputValues.forEach(inputValue => {
+		const inputNumber = parseFloat(inputValue.value)
+		inputNumbersArr.push(inputNumber)
+	})
+	const exerciseGrades = inputNumbersArr.slice(0, -4)
+	const testGrades = inputNumbersArr.slice(-4)
+	const sumExerciseGrades = exerciseGrades.reduce((prevGrade, nextGrade) => {
+		return prevGrade + nextGrade
+	})
+	const sumTestGrades = testGrades.reduce((prevGrade, nextGrade) => {
+		return prevGrade + nextGrade
+	})
+
+	const gradeResultNumber = 2/3 * sumExerciseGrades/exerciseGrades.length + 1/3 * sumTestGrades/testGrades.length
+	gradeResult.textContent = gradeResultNumber.toFixed(1)
+}
+
+const showResult = e => {
+	e.preventDefault()
+	gradeResultInfo.classList.toggle('result-visible')
 }
 
 const displayYear = () => {
@@ -156,7 +195,6 @@ navBurger.addEventListener('click', showMobileItems)
 navBurger.addEventListener('click', removeMobileItemsDown)
 window.addEventListener('DOMContentLoaded', highlightNavMain)
 window.addEventListener('DOMContentLoaded', highlightMobileMain)
+calculateButton.addEventListener('click', calculateGrade)
+calculateButton.addEventListener('click', showResult)
 window.addEventListener('DOMContentLoaded', displayYear)
-specialityEnlarge.addEventListener('click', enlargeImg)
-specialityImg.addEventListener('click', closeImg)
-specialityClose.addEventListener('click', closeImg)

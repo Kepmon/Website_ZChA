@@ -109,7 +109,7 @@ a
 		align-items: center;
 		position: relative;
 		height: 4rem;
-		border-right: 4px ridge var(--nav-red);
+		border-right: 4px ridge var(--red-color);
 		opacity: 0.75;
 
 		&--last {
@@ -122,7 +122,7 @@ a
 	}
 
 	&__item-main:hover {
-		background-color: var(--nav-red);
+		background-color: var(--red-color);
 	}
 
 	&__items-down {
@@ -134,7 +134,7 @@ a
 		display: block;
 		padding: 0.8rem 0.5rem;
 		background-color: var(--main-color);
-		border-bottom: 4px ridge var(--nav-red);
+		border-bottom: 4px ridge var(--red-color);
 
 		&--last {
 			border: none;
@@ -142,7 +142,7 @@ a
 	}
 
 	&__item-down:hover {
-		background-color: var(--nav-red);
+		background-color: var(--red-color);
 	}
 
 	&__mobile {
@@ -328,7 +328,7 @@ a
 		{
 			padding: 1rem;
 			background-color: var(--main-color);
-			border: 5px ridge var(--nav-red);
+			border: 5px ridge var(--red-color);
 			border-radius: 10px;
 		}
 
@@ -378,14 +378,38 @@ a
 
 		&__link:hover
 		{
-			color: var(--nav-red);
+			color: var(--red-color);
 		}
 
-		&__calculate-grade
+		&__calculate-grade, &__calculator-result-info
 		{
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			padding: 1.5rem;
+			margin: 1rem auto 0;
+			width: 20vw;
+			background-image: var(--calculator-background);
+			text-align: center;
+			border-radius: 10px;
+			box-shadow: 2px 2px 5px var(--box-shadow);
+		}
+
+		&__calculator-result
+		{
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height .5s;
+		}
+
+		&__calculator-result-info
+		{
+			margin-top: 0;
+		}
+
+		&__calculator-heading
+		{
+			font-size: 1.2rem;
+			font-weight: bold;
 		}
 
 		&__calculator
@@ -394,16 +418,13 @@ a
 			flex-direction: column;
 			align-items: center;
 			margin-top: 1rem;
-			padding: 1.5rem;
-			width: 25%;
-			border-radius: 10px;
-			background-image: var(--calculator-background);
 		}
 
 		&__calculator-grade
 		{
-			margin-bottom: 1rem;
-			width: 70%;
+			margin-bottom: .7rem;
+			width: 40%;
+			height: 1.5rem;
 			text-align: center;
 			border-radius: 5px;
 		}
@@ -412,14 +433,39 @@ a
 		{
 			margin-top: 1rem;
 			padding: .5rem 3rem;
+			width: 70%;
+			background-color: var(--main-color);
+			color: var(--text);
+			font-weight: bold;
+			font-size: 1rem;
 			border: none;
-			border-radius: 5px;
+			border-radius: 10px;
+			cursor: pointer;
+			transition: background-color .3s;
+		}
+
+		&__calculator-button:hover
+		{
+			background-color: var(--red-color);
+		}
+
+		&__result
+		{
+			margin-top: 1rem;
+			font-size: 2rem;
+			font-weight: bold;
+			color: var(--main-color);
 		}
 	}
 
 	.courses-visible
 	{
-		max-height: 200vh;
+		max-height: 250vh;
+	}
+
+	.result-visible
+	{
+		max-height: 20vh;
 	}
 	// end of courses page
 }

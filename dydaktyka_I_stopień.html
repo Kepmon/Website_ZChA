@@ -210,7 +210,7 @@
 
                 <div class="courses">
                     <div class="courses__title">Podstawy chemii analitycznej (laboratorium) <i class="fa-solid fa-angles-down"></i></div>
-                    <div class="courses__content">
+                    <div class="courses__content courses-visible">
                         <div class="courses__content-box">
                             <h2 class="courses__heading">Program kursu:</h2>
                             <ul>
@@ -246,7 +246,7 @@
                             <p>+/- 0.5 oceny od prowadzącego</p>
 
                             <div class="courses__calculate-grade">
-                                <p class="courses__subheading">Kalkulator oceny końcowej:</p>
+                                <p class="courses__calculator-heading">Kalkulator oceny końcowej</p>
                                 <form class="courses__calculator">
                                     <label for="grade-analysis-1">Ocena z ćwiczenia 1:</label>
                                     <select name="" id="grade-analysis-1" class="courses__calculator-grade">
@@ -321,6 +321,12 @@
 
                                     <button class="courses__calculator-button">Oblicz</button>
                                 </form>
+                            </div>
+                            <div class="courses__calculator-result">
+                                <div class="courses__calculator-result-info">
+                                    <p>Twoja ocena końcowa to:</p>
+                                    <p class="courses__result"></p>
+                                </div>
                             </div>
 
                             <h2 class="courses__heading">Inne:</h2>
