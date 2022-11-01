@@ -117,7 +117,14 @@
 		.courses {
 			&__calculate-grade,
 			&__calculator-result-info {
-				width: 60vw;
+				width: 300px;
+			}
+
+			&__heading,
+			&__calculator-heading,
+			&__calculator-button,
+			&__close-result {
+				font-size: 1rem;
 			}
 		}
 
@@ -213,8 +220,25 @@
 
 			&__calculate-grade,
 			&__calculator-result-info {
-				width: 80vw;
+				width: 300px;
 			}
+
+			&__heading,
+			&__calculator-heading,
+			&__calculator-button,
+			&__close-result {
+				font-size: 0.9rem;
+			}
+
+			&__calculator-button,
+			&__close-result {
+				padding: 0.5rem 1rem;
+				width: 70%;
+			}
+		}
+
+		.courses-visible {
+			max-height: 650vh;
 		}
 	}
 
@@ -222,5 +246,27 @@
 	.labs,
 	.speciality {
 		font-size: 0.8rem;
+	}
+}
+
+@media (max-width: 450px) {
+	.main {
+		.courses {
+			&__calculate-grade,
+			&__calculator-result-info {
+				width: 220px;
+			}
+		}
+	}
+}
+
+@media (max-width: 350px) {
+	.main {
+		.courses {
+			&__calculate-grade,
+			&__calculator-result-info {
+				width: 180px;
+			}
+		}
 	}
 }
