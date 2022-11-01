@@ -235,6 +235,12 @@
 				padding: 0.5rem 1rem;
 				width: 70%;
 			}
+
+			&__download {
+				&--shorter {
+					margin: 0 auto 1rem;
+				}
+			}
 		}
 
 		.courses-visible {

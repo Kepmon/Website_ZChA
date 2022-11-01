@@ -38,8 +38,7 @@ body {
 	font-size: 1.3rem;
 }
 
-a
-{
+a {
 	color: var(--text);
 }
 
@@ -273,7 +272,7 @@ a
 	.speciality-list {
 		list-style: inside;
 	}
-	
+
 	.speciality-list:last-of-type {
 		margin-bottom: 2rem;
 	}
@@ -290,7 +289,7 @@ a
 
 		.speciality-photo {
 			width: 50%;
-			transition: width .5s;
+			transition: width 0.5s;
 		}
 
 		.fa-solid,
@@ -322,77 +321,70 @@ a
 	// end of speciality page
 
 	// courses page
-	.courses
-	{
-		&__title, &__content-box
-		{
+	.courses {
+		&__title,
+		&__content-box {
 			padding: 1rem;
 			background-color: var(--main-color);
 			border: 5px ridge var(--red-color);
 			border-radius: 10px;
 		}
 
-		&__title
-		{
+		&__title {
 			text-align: center;
 			cursor: pointer;
 		}
 
-		&__content
-		{
+		&__content {
 			max-height: 0;
 			overflow: hidden;
-			transition: max-height .5s;
+			transition: max-height 0.5s;
 		}
 
-		&__heading
-		{
+		&__heading {
 			margin-top: 1rem;
 			font-size: 1.2rem;
 		}
 
-		&__heading:first-of-type
-		{
+		&__heading:first-of-type {
 			margin-top: 0;
 		}
 
-		&__subheading
-		{
+		&__subheading {
 			margin-top: 1rem;
 		}
 
-		&__lectures
-		{
+		&__lectures {
 			margin-top: 1rem;
 		}
 
-		&__item
-		{
+		&__item {
 			list-style: none;
 		}
 
-		&__link
-		{
-			transition: color .5s;
+		&__link {
+			display: block;
+			transition: color 0.5s;
 		}
 
-		&__link:hover
-		{
+		&__link:hover {
 			color: var(--red-color);
 		}
 
-		&__margin-top
-		{
+		&__margin-top {
 			margin-top: 1rem;
 		}
 
-		&__bold
-		{
+		&__margin-bottom {
+			margin-bottom: 1rem;
+		}
+
+		&__bold {
 			font-weight: bold;
 		}
 
-		&__calculate-grade, &__calculator-result-info
-		{
+		&__calculate-grade,
+		&__calculator-result-info {
 			display: flex;
 			flex-direction: column;
 			padding: 1.5rem;
@@ -404,51 +396,45 @@ a
 			box-shadow: 2px 2px 5px var(--box-shadow);
 		}
 
-		&__calculator-result-info
-		{
+		&__calculator-result-info {
 			align-items: center;
 			background-image: var(--popup-background);
 		}
 
-		&__calculator-result
-		{
+		&__calculator-result {
 			max-height: 0;
 			overflow: hidden;
-			transition: max-height .3s;
+			transition: max-height 0.3s;
 		}
 
-		&__calculator-result-info
-		{
+		&__calculator-result-info {
 			margin-top: 0;
 		}
 
-		&__calculator-heading
-		{
+		&__calculator-heading {
 			font-size: 1.2rem;
 			font-weight: bold;
 		}
 
-		&__calculator
-		{
+		&__calculator {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			margin-top: 1rem;
 		}
 
-		&__calculator-grade
-		{
-			margin-bottom: .7rem;
+		&__calculator-grade {
+			margin-bottom: 0.7rem;
 			width: 40%;
 			height: 1.5rem;
 			text-align: center;
 			border-radius: 5px;
 		}
 
-		&__calculator-button, &__close-result
-		{
+		&__calculator-button,
+		&__close-result {
 			margin-top: 1rem;
-			padding: .5rem 3rem;
+			padding: 0.5rem 3rem;
 			width: 70%;
 			background-color: var(--main-color);
 			color: var(--text);
@@ -457,41 +443,51 @@ a
 			border: none;
 			border-radius: 10px;
 			cursor: pointer;
-			transition: background-color .3s;
+			transition: background-color 0.3s;
 		}
 
-		&__calculator-button:hover, &__close-result:hover
-		{
+		&__calculator-button:hover,
+		&__close-result:hover {
 			background-color: var(--red-color);
 		}
 
-		&__result
-		{
+		&__result {
 			margin: 1rem 0;
 			font-size: 2rem;
 			font-weight: bold;
 			color: var(--main-color);
 		}
 
-		&__explanation
-		{
+		&__explanation {
 			display: none;
 			margin-top: 1rem;
 			font-size: 0.8rem;
 			font-weight: bold;
 			color: var(--red-color);
-			line-height: .8rem;
+			line-height: 0.8rem;
+		}
+
+		&__download {
+			margin-bottom: 1rem;
+
+			&--shorter {
+				margin-bottom: 1rem;
+				width: 120px;
+			}
 		}
 	}
 
-	.courses-visible
-	{
+	.courses-visible {
 		max-height: 250vh;
 	}
 
-	.result-visible
-	{
+	.result-visible {
 		max-height: 30vh;
+	}
+
+	.dot-list
+	{
+		list-style: inside;
 	}
 	// end of courses page
 }
