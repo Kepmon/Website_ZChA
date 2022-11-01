@@ -104,20 +104,33 @@
 			font-size: 0.8rem;
 		}
 
-		.research {
-			font-size: 0.9rem;
-		}
-
-		.speciality-basic
-		{
+		.speciality-basic {
 			font-size: 1.1rem;
 		}
 
 		.speciality-more-info {
-            .speciality-closing-info {
-                font-size: .65rem;
-            }
-        }
+			.speciality-closing-info {
+				font-size: 0.65rem;
+			}
+		}
+
+		.courses {
+			&__calculate-grade,
+			&__calculator-result-info {
+				width: 60vw;
+			}
+		}
+
+		.courses-visible {
+			max-height: 350vh;
+		}
+	}
+
+	.research,
+	.labs,
+	.speciality,
+	.courses {
+		font-size: 0.9rem;
 	}
 
 	.footer {
@@ -167,36 +180,47 @@
 		}
 
 		.research,
-		.labs {
-			font-size: 0.8rem;
-		}
-
-		.research {
+		.labs,
+		.courses {
 			text-align: center;
 		}
 
 		.labs {
-			text-align: center;
-
-			&__subitems, &__subitems:last-child {
+			&__subitems,
+			&__subitems:last-child {
 				margin-left: 0;
 				font-size: 0.7rem;
 			}
 		}
 
-		.speciality-basic
-		{
+		.speciality-basic {
 			font-size: 1rem;
 		}
 
-		.speciality-info, .speciality-list {
+		.speciality-info,
+		.speciality-list {
 			text-align: center;
 		}
 
 		.speciality-more-info {
-            .speciality-closing-info {
-                font-size: .5rem;
-            }
-        }
+			.speciality-closing-info {
+				font-size: 0.5rem;
+			}
+		}
+
+		.courses {
+			font-size: 0.8rem;
+
+			&__calculate-grade,
+			&__calculator-result-info {
+				width: 80vw;
+			}
+		}
+	}
+
+	.research,
+	.labs,
+	.speciality {
+		font-size: 0.8rem;
 	}
 }
