@@ -25,6 +25,8 @@ const inputValues = document.querySelectorAll('.courses__calculator-grade')
 const calculateButton = document.querySelector('.courses__calculator-button')
 const gradeResult = document.querySelector('.courses__result')
 const gradeResultInfo = document.querySelector('.courses__calculator-result')
+const gradeCloseResult = document.querySelector('.courses__close-result')
+const coursesExplanation = document.querySelector('.courses__explanation')
 const year = document.querySelector('.year')
 
 const inputNumbersArr = []
@@ -161,11 +163,13 @@ for (let i = 0; i < coursesTitle.length; i++) {
 	coursesTitle[i].addEventListener('click', showCoursesContent)
 }
 
-const calculateGrade = () => {
+
+const calculateGrade = e => {
 	inputValues.forEach(inputValue => {
 		const inputNumber = parseFloat(inputValue.value)
 		inputNumbersArr.push(inputNumber)
 	})
+
 	const exerciseGrades = inputNumbersArr.slice(0, -4)
 	const testGrades = inputNumbersArr.slice(-4)
 	const sumExerciseGrades = exerciseGrades.reduce((prevGrade, nextGrade) => {
@@ -174,14 +178,37 @@ const calculateGrade = () => {
 	const sumTestGrades = testGrades.reduce((prevGrade, nextGrade) => {
 		return prevGrade + nextGrade
 	})
+	const flunkingGradesCount = exerciseGrades.filter(grade => grade === 2).length
+	const testAverage = sumTestGrades/testGrades.length
 
-	const gradeResultNumber = 2/3 * sumExerciseGrades/exerciseGrades.length + 1/3 * sumTestGrades/testGrades.length
-	gradeResult.textContent = gradeResultNumber.toFixed(1)
+	if (flunkingGradesCount <= 1 && testAverage >= 3)
+	{
+		const gradeResultNumber = Math.round((2/3 * sumExerciseGrades/3 + 1/3 * sumTestGrades/4) * 2) / 2
+		gradeResult.textContent = gradeResultNumber.toFixed(1)
+		coursesExplanation.style.display = "none"
+	}
+	else
+	{
+		gradeResult.textContent = "2.0"
+		coursesExplanation.style.display = "block"
+	}
+	
+	inputNumbersArr.length = 0
+
+	e.preventDefault()
+	if (gradeResultInfo.classList.contains('result-visible'))
+	{
+		gradeResult.textContent = gradeResultNumber.toFixed(1)
+	}
+	else
+	{
+		gradeResultInfo.classList.add('result-visible')
+	}
 }
 
-const showResult = e => {
+const closeResult = e => {
 	e.preventDefault()
-	gradeResultInfo.classList.toggle('result-visible')
+	gradeResultInfo.classList.remove('result-visible')
 }
 
 const displayYear = () => {
@@ -196,5 +223,6 @@ navBurger.addEventListener('click', removeMobileItemsDown)
 window.addEventListener('DOMContentLoaded', highlightNavMain)
 window.addEventListener('DOMContentLoaded', highlightMobileMain)
 calculateButton.addEventListener('click', calculateGrade)
-calculateButton.addEventListener('click', showResult)
+gradeCloseResult.addEventListener('click', closeResult)
 window.addEventListener('DOMContentLoaded', displayYear)
+

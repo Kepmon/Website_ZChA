@@ -381,6 +381,16 @@ a
 			color: var(--red-color);
 		}
 
+		&__margin-top
+		{
+			margin-top: 1rem;
+		}
+
+		&__bold
+		{
+			font-weight: bold;
+		}
+
 		&__calculate-grade, &__calculator-result-info
 		{
 			display: flex;
@@ -392,6 +402,12 @@ a
 			text-align: center;
 			border-radius: 10px;
 			box-shadow: 2px 2px 5px var(--box-shadow);
+		}
+
+		&__calculator-result-info
+		{
+			align-items: center;
+			background-image: var(--popup-background);
 		}
 
 		&__calculator-result
@@ -429,7 +445,7 @@ a
 			border-radius: 5px;
 		}
 
-		&__calculator-button
+		&__calculator-button, &__close-result
 		{
 			margin-top: 1rem;
 			padding: .5rem 3rem;
@@ -444,17 +460,27 @@ a
 			transition: background-color .3s;
 		}
 
-		&__calculator-button:hover
+		&__calculator-button:hover, &__close-result:hover
 		{
 			background-color: var(--red-color);
 		}
 
 		&__result
 		{
-			margin-top: 1rem;
+			margin: 1rem 0;
 			font-size: 2rem;
 			font-weight: bold;
 			color: var(--main-color);
+		}
+
+		&__explanation
+		{
+			display: none;
+			margin-top: 1rem;
+			font-size: 0.8rem;
+			font-weight: bold;
+			color: var(--red-color);
+			line-height: .8rem;
 		}
 	}
 
@@ -465,7 +491,7 @@ a
 
 	.result-visible
 	{
-		max-height: 20vh;
+		max-height: 30vh;
 	}
 	// end of courses page
 }
