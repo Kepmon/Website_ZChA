@@ -475,10 +475,43 @@ a {
 				width: 120px;
 			}
 		}
+
+		&__table
+		{
+			margin: 1rem auto 0;
+			border: 3px ridge var(--red-color);
+			border-collapse: collapse;
+			border-radius: 10px;
+			text-align: center;
+			background-color: var(--table-color);
+			overflow: hidden;
+
+			th, tr, td
+			{
+				padding: .5rem;
+				border: 3px ridge var(--red-color);
+			}
+
+			td:first-child
+			{
+				width: 6rem;
+			}
+
+			td:nth-child(2)
+			{
+				padding: 0 2rem;
+			}
+
+			.colored
+			{
+				height: 2rem;
+				background-color: var(--red-color);
+			}
+		}
 	}
 
 	.courses-visible {
-		max-height: 250vh;
+		max-height: 350vh;
 	}
 
 	.result-visible {
