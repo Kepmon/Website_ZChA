@@ -126,6 +126,12 @@
 			&__close-result {
 				font-size: 1rem;
 			}
+
+			&__table {
+				td:first-child {
+					width: 4rem;
+				}
+			}
 		}
 
 		.courses-visible {
@@ -239,6 +245,12 @@
 			&__download {
 				&--shorter {
 					margin: 0 auto 1rem;
+				}
+			}
+
+			&__table {
+				td:first-child {
+					width: 3rem;
 				}
 			}
 		}

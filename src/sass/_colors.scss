@@ -9,8 +9,8 @@
     --analchem-color: #00c900;
     --metallurgy-color: #8dc401;
     --table-color: #a34100;
-    --footer-bg-1: #714433;
-    --footer-bg-2: #412525;
+    --footer-bg-1: #282828;
+    --footer-bg-2: #141414;
 }
 
 [data-mode='dark'] {
@@ -20,6 +20,8 @@
     --calculator-background: linear-gradient(#333 0%, #222 50%, #000 100%);
     --popup-background: linear-gradient(0deg, #333 0%, #222 30%, #000 100%);
     --box-shadow: #111;
+    --footer-bg-1: #282828;
+    --footer-bg-2: #141414;
 }
 
 [data-mode='light'] {
@@ -29,4 +31,6 @@
     --calculator-background: linear-gradient(#ccc 0%, #ddd 50%, #fff 100%);
     --popup-background: linear-gradient(0deg, #ccc 0%, #ddd 30%, #fff 100%);
     --box-shadow: #aaa;
+    --footer-bg-1: #b8b8b8;
+    --footer-bg-2: #949494;
 }
