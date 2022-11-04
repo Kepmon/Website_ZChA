@@ -137,6 +137,16 @@
 		.courses-visible {
 			max-height: 350vh;
 		}
+
+		.staff {
+			&__items {
+				margin-top: 3rem;
+			}
+
+			&__item-photo {
+				width: 50%;
+			}
+		}
 	}
 
 	.research,
@@ -148,6 +158,7 @@
 
 	.footer {
 		font-size: 0.7rem;
+		line-height: 1.2rem;
 
 		&__facebook,
 		&__owner {

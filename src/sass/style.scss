@@ -479,34 +479,30 @@ a {
 			}
 		}
 
-		&__table
-		{
+		&__table {
 			margin: 1rem auto 0;
 			border: 3px ridge var(--red-color);
 			border-collapse: collapse;
-			border-radius: 10px;
 			text-align: center;
 			background-color: var(--table-color);
 			overflow: hidden;
 
-			th, tr, td
-			{
-				padding: .5rem;
+			th,
+			tr,
+			td {
+				padding: 0.5rem;
 				border: 3px ridge var(--red-color);
 			}
 
-			td:first-child
-			{
+			td:first-child {
 				width: 6rem;
 			}
 
-			td:nth-child(2)
-			{
+			td:nth-child(2) {
 				padding: 0 2rem;
 			}
 
-			.colored
-			{
+			.colored {
 				height: 2rem;
 				background-color: var(--red-color);
 			}
@@ -521,11 +517,67 @@ a {
 		max-height: 30vh;
 	}
 
-	.dot-list
-	{
+	.dot-list {
 		list-style: inside;
 	}
 	// end of courses page
+
+	// staff page
+	.staff {
+		&__items {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+			margin-top: 5rem;
+		}
+
+		&__item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: 3rem;
+			padding: 0.5rem;
+			width: 300px;
+
+			&--no-margin {
+				margin-bottom: 0;
+			}
+		}
+
+		&__item-photo {
+			margin-bottom: 1rem;
+			width: 60%;
+		}
+
+		&__item-info {
+			text-align: center;
+		}
+
+		&__name {
+			margin-bottom: 1rem;
+			font-weight: bold;
+		}
+
+		&__table,
+		&__table-th,
+		&__table-td {
+			padding: .8vw 2vw;
+			text-align: center;
+			border: 3px ridge var(--red-color);
+			border-collapse: collapse;
+		}
+
+		&__table {
+			margin: 0 auto;
+			background-color: var(--table-color);
+			overflow: hidden;
+
+			.wide {
+				max-width: 35vw;
+			}
+		}
+	}
+	// end of staff page
 }
 
 .footer {
