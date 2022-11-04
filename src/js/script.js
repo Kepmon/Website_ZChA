@@ -3,17 +3,11 @@ const main = document.querySelector('.main')
 const themeLink = document.querySelector('.theme')
 const languageLink = document.querySelector('.language')
 const navItemsMain = Array.from(document.querySelectorAll('.down'))
-const navItems = document.querySelector('.nav__items')
-const allNavItemsMain = Array.from(document.querySelectorAll('.nav__item-main'))
 const ulItemsDown = Array.from(document.querySelectorAll('.nav__items-down'))
 const navItemsDown = document.querySelectorAll('.nav__item-down')
 const navItemsMobileMain = Array.from(document.querySelectorAll('.mobile-down'))
-const allMobileItemsMain = Array.from(
-	document.querySelectorAll('.nav__mobile-main')
-)
-const ulItemsMobileDown = Array.from(
-	document.querySelectorAll('.nav__mobile-items-down')
-)
+const ulItemsMobileDown = Array.from(document.querySelectorAll('.nav__mobile-items-down'))
+const allNavItemsMain = Array.from(document.querySelectorAll('.nav__item-main'))
 const navBurger = document.querySelector('.nav__burger')
 const navMobileItems = document.querySelector('.nav__mobile-items')
 const specialityImg = document.querySelector('.speciality-photo')
@@ -27,16 +21,22 @@ const gradeResult = document.querySelector('.courses__result')
 const gradeResultInfo = document.querySelector('.courses__calculator-result')
 const gradeCloseResult = document.querySelector('.courses__close-result')
 const coursesExplanation = document.querySelector('.courses__explanation')
-const year = document.querySelector('.year')
 
+let currentTheme
 const inputNumbersArr = []
 
 const changeTheme = () => {
 	if (body.getAttribute('data-mode') === 'dark') {
-		body.setAttribute('data-mode', 'light')
+		localStorage.setItem('theme', 'light')
 	} else {
-		body.setAttribute('data-mode', 'dark')
+		localStorage.setItem('theme', 'dark')
 	}
+	saveTheme()
+}
+
+const saveTheme = () => {
+	currentTheme = localStorage.getItem('theme')
+	body.setAttribute('data-mode', currentTheme)
 }
 
 for (let i = 0; i < navItemsMain.length; i++) {
@@ -77,6 +77,8 @@ const highlightNavMain = () => {
 }
 
 const removeItemsDown = (e) => {
+	const navItems = document.querySelector('.nav__items')
+
 	if (e.target !== navItems && allNavItemsMain.indexOf(e.target) === -1) {
 		ulItemsDown.forEach((item) => item.classList.remove('nav-active'))
 	}
@@ -102,6 +104,10 @@ const showMobileItems = () =>
 	navMobileItems.classList.toggle('nav-mobile-active')
 
 const highlightMobileMain = () => {
+	const allMobileItemsMain = Array.from(
+		document.querySelectorAll('.nav__mobile-main')
+	)
+
 	switch (true) {
 		case main.classList.contains('home'):
 			allMobileItemsMain[0].classList.add('menu-item-active')
@@ -135,9 +141,7 @@ const removeMobileItemsDown = () => {
 }
 
 if (
-	specialityEnlarge !== null &&
-	specialityClose !== null &&
-	specialityImg !== null
+	specialityEnlarge !== null && specialityClose !== null && specialityImg !== null
 ) {
 	const enlargeImg = () => {
 		specialityEnlarge.style.display = 'none'
@@ -163,14 +167,16 @@ for (let i = 0; i < coursesTitle.length; i++) {
 	coursesTitle[i].addEventListener('click', showCoursesContent)
 }
 
-if (inputValues !== [] && gradeResult !== null & coursesExplanation !== null && gradeResultInfo !== null && gradeCloseResult !== null)
-{
-	const calculateGrade = e => {
-		inputValues.forEach(inputValue => {
+if (
+	inputValues !== [] &&
+	gradeResult !== null & coursesExplanation !== null && gradeResultInfo !== null && gradeCloseResult !== null
+) {
+	const calculateGrade = (e) => {
+		inputValues.forEach((inputValue) => {
 			const inputNumber = parseFloat(inputValue.value)
 			inputNumbersArr.push(inputNumber)
 		})
-	
+
 		const exerciseGrades = inputNumbersArr.slice(0, -4)
 		const testGrades = inputNumbersArr.slice(-4)
 		const sumExerciseGrades = exerciseGrades.reduce((prevGrade, nextGrade) => {
@@ -179,35 +185,31 @@ if (inputValues !== [] && gradeResult !== null & coursesExplanation !== null && 
 		const sumTestGrades = testGrades.reduce((prevGrade, nextGrade) => {
 			return prevGrade + nextGrade
 		})
-		const flunkingGradesCount = exerciseGrades.filter(grade => grade === 2).length
-		const testAverage = sumTestGrades/testGrades.length
-	
-		if (flunkingGradesCount <= 1 && testAverage >= 3)
-		{
-			const gradeResultNumber = Math.round((2/3 * sumExerciseGrades/3 + 1/3 * sumTestGrades/4) * 2) / 2
+		const flunkingGradesCount = exerciseGrades.filter(
+			(grade) => grade === 2
+		).length
+		const testAverage = sumTestGrades / testGrades.length
+
+		if (flunkingGradesCount <= 1 && testAverage >= 3) {
+			const gradeResultNumber = Math.round((((2 / 3) * sumExerciseGrades) / 3 + ((1 / 3) * sumTestGrades) / 4) * 2) / 2
 			gradeResult.textContent = gradeResultNumber.toFixed(1)
-			coursesExplanation.style.display = "none"
+			coursesExplanation.style.display = 'none'
+		} else {
+			gradeResult.textContent = '2.0'
+			coursesExplanation.style.display = 'block'
 		}
-		else
-		{
-			gradeResult.textContent = "2.0"
-			coursesExplanation.style.display = "block"
-		}
-		
+
 		inputNumbersArr.length = 0
-	
+
 		e.preventDefault()
-		if (gradeResultInfo.classList.contains('result-visible'))
-		{
+		if (gradeResultInfo.classList.contains('result-visible')) {
 			gradeResult.textContent = gradeResultNumber.toFixed(1)
-		}
-		else
-		{
+		} else {
 			gradeResultInfo.classList.add('result-visible')
 		}
 	}
 
-	const closeResult = e => {
+	const closeResult = (e) => {
 		e.preventDefault()
 		gradeResultInfo.classList.remove('result-visible')
 	}
@@ -217,15 +219,17 @@ if (inputValues !== [] && gradeResult !== null & coursesExplanation !== null && 
 }
 
 const displayYear = () => {
+	const year = document.querySelector('.year')
+
 	const getYear = new Date()
 	year.textContent = getYear.getFullYear()
 }
 
 themeLink.addEventListener('click', changeTheme)
+window.addEventListener('DOMContentLoaded', saveTheme)
 window.addEventListener('click', removeItemsDown)
 navBurger.addEventListener('click', showMobileItems)
 navBurger.addEventListener('click', removeMobileItemsDown)
 window.addEventListener('DOMContentLoaded', highlightNavMain)
 window.addEventListener('DOMContentLoaded', highlightMobileMain)
 window.addEventListener('DOMContentLoaded', displayYear)
-
