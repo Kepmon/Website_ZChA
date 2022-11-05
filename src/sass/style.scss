@@ -113,6 +113,7 @@ a {
 		height: 4rem;
 		border-right: 4px ridge var(--red-color);
 		opacity: 0.75;
+		cursor: pointer;
 
 		&--last {
 			border: none;
