@@ -99,7 +99,7 @@ a {
 
 	&__item-main,
 	&__item-down {
-		width: 11vw;
+		padding: 1.5rem;
 		text-align: center;
 		color: var(--nav-text);
 		transition: background-color 0.3s;
@@ -179,7 +179,7 @@ a {
 	}
 
 	&__photo-image {
-		width: 45vw;
+		max-width: 45vw;
 	}
 
 	&__photo-text {
@@ -497,7 +497,7 @@ a {
 			}
 
 			td:first-child {
-				width: 6rem;
+				max-width: 6rem;
 			}
 
 			td:nth-child(2) {

@@ -36,7 +36,15 @@ const changeTheme = () => {
 
 const saveTheme = () => {
 	currentTheme = localStorage.getItem('theme')
-	body.setAttribute('data-mode', currentTheme)
+	
+	if (currentTheme !== null)
+	{
+		body.setAttribute('data-mode', currentTheme)
+	}
+	else
+	{
+		body.setAttribute('data-mode', 'dark')
+	}
 }
 
 for (let i = 0; i < navItemsMain.length; i++) {
