@@ -1,0 +1,34 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="footer">
+    <p>Zapraszamy na profil Facebook-owy Katedry Chemii Analitycznej i Metalurgii Chemicznej</p>
+    <a href="https://www.facebook.com/chemia.analityczna" target="_blank">
+        <img
+            src="/img/facebook-logo.svg"
+            alt="Logo facebooka - link prowadzący do profilu facebookowego katedry"
+        >
+    </a>
+    <p>Katedra Chemii Analitycznej i Metalurgii Chemicznej Politechniki Wrocławskiej &copy; { year }</p>
+</footer>
+
+<style lang="scss">
+    @use 'src/sass/_colors.scss' as *;
+
+    .footer {
+        padding: 1rem;
+        background-color: var(--footer-bg-2);
+        text-align: center;
+
+        img {
+            margin-inline: auto;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        p:last-child {
+            font-size: clamp(.7rem, 1vw + .4rem, .9rem);
+        }
+    }
+</style>

@@ -1,0 +1,101 @@
+<header class="header">
+	<a href="/" class="header__logo">
+		<img
+			src="/img/Kolba_sama.gif"
+			alt="Obrazek do logo - wrzący roztwór w kolbie"
+			class="header__logo-img"
+		/>
+		<span class="header__logo-text">
+			Katedra Chemii Analitycznej i Metalurgii Chemicznej
+		</span>
+	</a>
+
+	<div class="header__options">
+		<button class="header__option">
+            <img src="img/pallete.svg" alt="" class="header__option-icon">
+            <span>Zmień motyw</span>
+        </button>
+		<button class="header__option">
+            <img src="img/language.svg" alt="" class="header__option-icon">
+            <span>English version</span>
+        </button>
+	</div>
+</header>
+
+<style lang="scss">
+@use 'src/sass/_colors.scss' as *;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 1.5rem 2rem;
+        background-color: var(--header-bg);
+
+        &__logo {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+
+            &-img {
+                height: 3rem;
+            }
+
+            &-text {
+                font-size: clamp(1rem, 3vw + .5rem, 1.3rem); // fallback for browsers that don't support @container or @supports
+                text-align: center;
+            }
+        }
+
+        &__options {
+            display: flex;
+            gap: 2rem;
+        }
+
+        &__option {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+
+            &-icon {
+                width: 20px;
+            }
+        }
+    }
+
+    @media (width > 640px) {
+        .header {
+            justify-content: space-between;
+            flex-direction: row;
+
+            &__logo {
+                gap: 1rem;
+
+                &-text {
+                    text-align: start;
+                }
+            }
+        }
+    }
+
+    @supports (container-type: inline-size) {
+        .header__logo {
+            container-type: inline-size;
+            justify-content: center;
+            width: 80%;
+
+            &-text {
+                font-size: clamp(1rem, 3cqi + .5rem, 1.3rem);
+            }
+        }
+        
+        @media (width > 640px) {
+            .header__logo {
+                justify-content: start;
+                width: auto;
+                flex-grow: 1;
+            }
+        }
+    }
+</style>

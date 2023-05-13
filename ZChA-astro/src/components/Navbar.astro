@@ -1,0 +1,203 @@
+<nav class="nav">
+    <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
+        <span>Menu</span>
+        <svg width="30" height="27" fill="#fff">
+            <rect x="0" y="4" width="26" height="3" rx="2" ry="2"></rect>
+            <rect x="0" y="12" width="26" height="3" rx="2" ry="2"></rect>
+            <rect x="0" y="20" width="26" height="3" rx="2" ry="2"></rect>
+        </svg>
+    </button>
+	<ul class="nav__items" id="nav-items">
+		<li class="nav__item-main"><a href="/">Strona główna</a></li>
+		<li class="nav__item-main">
+			<a class="nav__item-main-link" aria-controls="teaching-dropdown" aria-expanded="false">
+                <span>Dydaktyka</span>
+                <img src="/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć więcej opcji">
+            </a>
+			<ul class="nav__items-down" id="teaching-dropdown">
+				<li class="nav__item-down">
+					<a href="/dydaktyka_I_stopień">Studia inżynierskie I stopnia</a>
+				</li>
+				<li class="nav__item-down">
+                    <a href="/dydaktyka_niestacjonarne">Studia inżynierskie niestacjonarne</a>
+				</li>
+				<li class="nav__item-down">
+                    <a href="/dydaktyka_II_stopień">Studia magisterskie II stopnia</a>
+				</li>
+			</ul>
+		</li>
+		<li class="nav__item-main"><a href="/specjalność">Specjalność</a></li>
+		<li class="nav__item-main" aria-controls="nav-items" aria-expanded="false">
+            <a class="nav__item-main-link" aria-controls="employees-dropdown" aria-expanded="false">
+                <span>Pracownicy</span>
+                <img src="/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć więcej opcji">
+            </a>
+			<ul class="nav__items-down" id="employees-dropdown">
+				<li class="nav__item-down">
+					<a href="/zespół_chemii_analitycznej">Zespół Chemii Analitycznej</a>
+				</li>
+				<li class="nav__item-down">
+					<a href="/zespół_metalurgii">Zespół metalurgii chemicznej</a>
+				</li>
+				<li class="nav__item-down"><a href="/doktoranci">Doktoranci</a></li>
+				<li class="nav__item-down">
+					<a href="/konsultacje">Konsultacje</a>
+				</li>
+			</ul>
+		</li>
+		<li class="nav__item-main"><a href="/badania">Badania</a></li>
+		<li class="nav__item-main"><a href="/laboratoria">Laboratoria</a></li>
+	</ul>
+</nav>
+
+<script>
+	const menuButton: HTMLDivElement = document.querySelector('.nav__mobile-menu')!
+	const menuItemsWithDropdowns: NodeListOf<HTMLAnchorElement> =
+		document.querySelectorAll('.nav__item-main-link[aria-expanded]')
+
+	type Element = HTMLDivElement | HTMLAnchorElement
+	const setAriaValues = (element: Element) => {
+		if (element.getAttribute('aria-expanded') === 'false') {
+			element.setAttribute('aria-expanded', 'true')
+			return
+		}
+		element.setAttribute('aria-expanded', 'false')
+	}
+		
+	const setAriaForMenuButton = () => {
+		setAriaValues(menuButton)
+		closeOpenedDropdowns()
+	}
+	
+	const setAriaForDropdowns = () => {
+		menuItemsWithDropdowns.forEach((item) => {
+			item.addEventListener('click', () => {
+				setAriaValues(item)
+			})
+		})
+	}
+
+	const closeOpenedDropdowns = () => {
+		menuItemsWithDropdowns.forEach((item) => {
+			item.setAttribute('aria-expanded', 'false')
+		})
+	}
+
+	setAriaForDropdowns()
+	menuButton.addEventListener('click', setAriaForMenuButton)
+</script>
+
+
+<style lang="scss">
+    .nav {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 1rem;
+        background-color: var(--main-color);
+
+        &__mobile-menu {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+			&[aria-expanded="true"] + .nav__items {
+				max-height: 500px;
+			}
+        }
+
+        &__items {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+            position: absolute;
+            inset: 100% 0 auto;
+			max-height: 0;
+            background-color: inherit;
+			overflow: hidden;
+            z-index: 10;
+			transition: max-height .5s;
+        }
+
+        &__item-main {
+            padding-block: 8px;
+			cursor: pointer;
+
+			img {
+				transition: rotate .5s;
+			}
+
+			&:last-child {
+				padding-block-end: 16px;
+			}
+
+			&-link {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 5px;
+
+				&[aria-expanded="true"] {
+					img {
+						rotate: 180deg;
+					}
+				}
+
+				&[aria-expanded="true"] + .nav__items-down {
+					margin-block-start: 10px;
+					max-height: 200px;
+				}
+			}
+        }
+
+        &__items-down {
+			max-height: 0;
+			overflow: hidden;
+            border-radius: .5rem;
+            text-align: center;
+            background-color: var(--red-color);
+			transition: all .5s;
+        }
+
+		&__item-down {
+			padding-block: 8px;
+			padding-inline: 16px;
+		}
+    }
+
+    @media (width > 768px) {
+        .nav {
+			padding-block: 0;
+
+            &__mobile-menu {
+                display: none;
+            }
+
+			&__items {
+				flex-direction: row;
+				gap: clamp(0rem, 1vw, 2.5rem);
+				position: static;
+				max-height: min-content;
+				overflow: visible;
+			}
+
+			&__item-main, &__item-main:last-child {
+				position: relative;
+				padding-block: 24px;
+				padding-inline: clamp(12px, 1.125vw + .3rem, 16px);
+				transition: all .3s;
+			}
+
+			&__items-down {
+				position: absolute;
+				inset: 100% -50% auto;
+				margin-block: 5px;
+				background-color: var(--main-color);
+			}
+
+			&__item-main:hover, &__item-down:hover {
+				background-color: var(--red-color);
+			}
+        }
+    }
+</style>
