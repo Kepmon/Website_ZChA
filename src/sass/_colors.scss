@@ -11,7 +11,7 @@
     --table-color: #d16200;
 }
 
-[data-mode='dark'] {
+[data-mode="dark"] {
     --text: #eee;
     --background-color: #555;
     --container-background: linear-gradient(#444 0%, #333 50%, #111 100%);
@@ -22,7 +22,7 @@
     --footer-bg-2: #141414;
 }
 
-[data-mode='light'] {
+[data-mode="light"] {
     --text: #111;
     --background-color: #eadaba;
     --container-background: linear-gradient(#bbb 0%, #aaa 50%, #888 100%);
