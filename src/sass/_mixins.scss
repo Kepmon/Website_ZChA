@@ -1,0 +1,13 @@
+@mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle) {
+    @keyframes #{$name} {
+        #{$start} {
+            y: $y-from;
+            rotate: 0;
+        }
+
+        #{$end} {
+            y: $y-to;
+            rotate: $rotate-angle;
+        }
+    }
+}

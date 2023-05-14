@@ -2,9 +2,9 @@
     <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
         <span>Menu</span>
         <svg width="30" height="27" fill="#fff">
-            <rect x="0" y="4" width="26" height="3" rx="2" ry="2"></rect>
-            <rect x="0" y="12" width="26" height="3" rx="2" ry="2"></rect>
-            <rect x="0" y="20" width="26" height="3" rx="2" ry="2"></rect>
+            <rect x="0" y="4" width="26" height="3" rx="2" ry="2" class="hamburger-bar hamburger-bar--top"></rect>
+            <rect x="0" y="12" width="26" height="3" rx="2" ry="2" class="hamburger-bar hamburger-bar--middle"></rect>
+            <rect x="0" y="20" width="26" height="3" rx="2" ry="2" class="hamburger-bar hamburger-bar--bottom"></rect>
         </svg>
     </button>
 	<ul class="nav__items" id="nav-items">
@@ -89,6 +89,12 @@
 
 
 <style lang="scss">
+	@use '../sass/mixins' as *;
+	@include animation-mixin(rotate-right, 0%, 100%, 4, 13, 45deg);
+	@include animation-mixin(rotate-left, 0%, 100%, 20, 10, -45deg);
+	@include animation-mixin(rotate-right-back, 100%, 0%, 4, 13, 45deg);
+	@include animation-mixin(rotate-left-back, 100%, 0%, 20, 10, -45deg);
+
     .nav {
         display: flex;
         justify-content: center;
@@ -100,6 +106,40 @@
             display: flex;
             gap: 10px;
             align-items: center;
+			
+			.hamburger-bar {
+				&--top, &--bottom {
+					transform-origin: center;
+				}
+			}
+
+			:active {
+				.hamburger-bar {
+					&--top {
+						animation: rotate-right-back .5s forwards;
+					}
+		
+					&--bottom {
+						animation: rotate-left-back .5s forwards;
+					}
+				}
+			}
+
+			&[aria-expanded="true"] {
+				.hamburger-bar {
+					&--middle {
+						opacity: 0;
+					}
+	
+					&--top {
+						animation: rotate-right .5s forwards;
+					}
+	
+					&--bottom {
+						animation: rotate-left .5s forwards;
+					}
+				}
+			}
 
 			&[aria-expanded="true"] + .nav__items {
 				max-height: 500px;
