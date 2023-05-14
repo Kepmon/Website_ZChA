@@ -1,3 +1,7 @@
+---
+import { navItems } from '../ts/navItems'
+---
+
 <nav class="nav">
     <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
         <span>Menu</span>
@@ -8,45 +12,28 @@
         </svg>
     </button>
 	<ul class="nav__items" id="nav-items">
-		<li class="nav__item-main"><a href="/">Strona główna</a></li>
-		<li class="nav__item-main">
-			<a class="nav__item-main-link" aria-controls="teaching-dropdown" aria-expanded="false">
-                <span>Dydaktyka</span>
-                <img src="/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć więcej opcji">
-            </a>
-			<ul class="nav__items-down" id="teaching-dropdown">
-				<li class="nav__item-down">
-					<a href="/dydaktyka_I_stopień">Studia inżynierskie I stopnia</a>
-				</li>
-				<li class="nav__item-down">
-                    <a href="/dydaktyka_niestacjonarne">Studia inżynierskie niestacjonarne</a>
-				</li>
-				<li class="nav__item-down">
-                    <a href="/dydaktyka_II_stopień">Studia magisterskie II stopnia</a>
-				</li>
-			</ul>
-		</li>
-		<li class="nav__item-main"><a href="/specjalność">Specjalność</a></li>
-		<li class="nav__item-main" aria-controls="nav-items" aria-expanded="false">
-            <a class="nav__item-main-link" aria-controls="employees-dropdown" aria-expanded="false">
-                <span>Pracownicy</span>
-                <img src="/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć więcej opcji">
-            </a>
-			<ul class="nav__items-down" id="employees-dropdown">
-				<li class="nav__item-down">
-					<a href="/zespół_chemii_analitycznej">Zespół Chemii Analitycznej</a>
-				</li>
-				<li class="nav__item-down">
-					<a href="/zespół_metalurgii">Zespół metalurgii chemicznej</a>
-				</li>
-				<li class="nav__item-down"><a href="/doktoranci">Doktoranci</a></li>
-				<li class="nav__item-down">
-					<a href="/konsultacje">Konsultacje</a>
-				</li>
-			</ul>
-		</li>
-		<li class="nav__item-main"><a href="/badania">Badania</a></li>
-		<li class="nav__item-main"><a href="/laboratoria">Laboratoria</a></li>
+		{navItems.map((item) => (
+			<li class="nav__item-main">
+				<a
+					class:list={[{ 'nav__item-main-link': item.subitems }]}
+					href={item.url ? item.url : '#'}
+					aria-controls={item.subitems ? item.id : undefined}
+					aria-expanded={item.subitems ? 'false' : undefined}
+				>
+					{item.subitems ? <span>{item.name}</span> : item.name}
+					{item.subitems && <img src="/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć więcej opcji" />}
+				</a>
+				{item.subitems &&
+					<ul class="nav__items-down" id={item.id}>
+						{item.subitems.map((subitem) => (
+							<li class="nav__item-down">
+								<a href={subitem.url}>{subitem.name}</a>
+							</li>
+						))}
+					</ul>
+				}
+			</li>
+		))}
 	</ul>
 </nav>
 
@@ -71,7 +58,8 @@
 	
 	const setAriaForDropdowns = () => {
 		menuItemsWithDropdowns.forEach((item) => {
-			item.addEventListener('click', () => {
+			const linkParent = item.closest('li') as HTMLLIElement
+			linkParent.addEventListener('click', () => {
 				setAriaValues(item)
 			})
 		})
