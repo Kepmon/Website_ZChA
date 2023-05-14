@@ -43,8 +43,9 @@
             }
 
             &-text {
-                font-size: clamp(1rem, 3vw + .5rem, 1.3rem); // fallback for browsers that don't support @container or @supports
                 text-align: center;
+                // fallback for browsers that don't support @container or @supports
+                font-size: clamp(1rem, 3vw + .5rem, 1.3rem);
             }
         }
 
@@ -89,7 +90,7 @@
                 font-size: clamp(1rem, 3cqi + .5rem, 1.3rem);
             }
         }
-        
+
         @media (width > 640px) {
             .header__logo {
                 justify-content: start;

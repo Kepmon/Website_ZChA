@@ -51,9 +51,9 @@
 </nav>
 
 <script>
-	const menuButton: HTMLDivElement = document.querySelector('.nav__mobile-menu')!
-	const menuItemsWithDropdowns: NodeListOf<HTMLAnchorElement> =
-		document.querySelectorAll('.nav__item-main-link[aria-expanded]')
+	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLDivElement
+	const menuItemsWithDropdowns =
+		[...document.querySelectorAll('.nav__item-main-link[aria-expanded]')] as HTMLAnchorElement[]
 
 	type Element = HTMLDivElement | HTMLAnchorElement
 	const setAriaValues = (element: Element) => {
