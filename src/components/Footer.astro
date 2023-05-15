@@ -7,7 +7,7 @@ const year = new Date().getFullYear()
     <a href="https://www.facebook.com/chemia.analityczna" target="_blank">
         <img
             src="/img/facebook-logo.svg"
-            alt="Logo facebooka - link prowadzący do profilu facebookowego katedry"
+            alt="Logo facebooka - link prowadzący do profilu katedry na facebook-u"
         >
     </a>
     <p>Katedra Chemii Analitycznej i Metalurgii Chemicznej Politechniki Wrocławskiej &copy;
@@ -19,9 +19,11 @@ const year = new Date().getFullYear()
     @use 'src/sass/_colors.scss' as *;
 
     .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 1rem;
         background-color: var(--footer-bg-2);
-        text-align: center;
 
         img {
             margin-inline: auto;

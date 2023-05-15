@@ -7,8 +7,9 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:astro/recommended',
+    'plugin:astro/jsx-a11y-recommended',
     'eslint:recommended',
-    'airbnb-base'
+    'airbnb-base',
   ],
   parser: '@astro/parser/eslint-plugin',
   parserOptions: {
@@ -26,7 +27,7 @@ module.exports = {
       },
       rules: {
         'astro/prefer-class-list-directive': 'error',
-        'astro/no-unused-css-selector': 'error'
+        'astro/no-unused-css-selector': 'error',
       }
     }
   ],
