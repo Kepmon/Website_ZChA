@@ -1,5 +1,7 @@
 ---
 import { navItems } from '../ts/navItems'
+
+const pathname = new URL(Astro.request.url).pathname
 ---
 
 <nav class="nav">
@@ -15,7 +17,10 @@ import { navItems } from '../ts/navItems'
 		{navItems.map((item) => (
 			<li class="nav__item-main">
 				<a
-					class:list={[{ 'nav__item-main-link': item.subitems }]}
+					class:list={[{
+						'nav__item-main-link': item.subitems,
+						'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
+					}]}
 					href={item.url ? item.url : '#'}
 					aria-controls={item.subitems ? item.id : undefined}
 					aria-expanded={item.subitems ? 'false' : undefined}
@@ -192,6 +197,11 @@ import { navItems } from '../ts/navItems'
 			padding-inline: 16px;
 		}
     }
+
+	.active-page {
+		font-weight: bold;
+		text-shadow: 1px 1px 5px var(--text-shadow);
+	}
 
     @media (width > 768px) {
         .nav {

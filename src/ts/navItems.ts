@@ -47,11 +47,11 @@ export const navItems: NavItem[] = [
             },
             {
                 name: 'Zespół metalurgii chemicznej',
-                url: '/zespool_metalurgii'
+                url: '/zespol_metalurgii'
             },
             {
-                name: '/doktoranci',
-                url: '/dydaktyka_II_stopien'
+                name: 'Doktoranci',
+                url: '/doktoranci'
             },
             {
                 name: 'Konsultacje',
