@@ -4,10 +4,12 @@ import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 
 interface Props {
-	title: string
+	title: string,
+	mainHeading: string
+	centered?: true
 }
 
-const { title } = Astro.props
+const { mainHeading, title, centered } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -30,7 +32,10 @@ const { title } = Astro.props
 				<Navbar />
 			</div>
 			<main class="main" id="main">
-				<slot />
+				<div class="container" class:list={[{ 'container--centered': centered }]}>
+					<h1>{mainHeading}</h1>
+					<slot />
+				</div>
 			</main>
 			<Footer />
 		</div>

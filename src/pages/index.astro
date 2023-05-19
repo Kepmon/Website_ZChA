@@ -2,39 +2,38 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 ---
 
-<BaseLayout title="Katedra chemii analitycznej i metalurgii chemicznej">
-	<div class="container container--centered">
-		<h1>
-			Katedra Chemii Analitycznej i Metalurgii Chemicznej
-		</h1>
-		<div class="main__building-content">
-			<picture>
-				<source srcset="img/building.webp">
-				<img
-					src="/img/building.jpg"
-					alt="Zdjęcie budynku A3, będącego głównym budynkiem Katedry Chemii Analitycznej i Metalurgii Chemicznej"
-					class="main__building-img"
-				/>
-			</picture>
-			<p class="main__building-img-overlay" aria-hidden="true">
-				Katedra Chemii Analitycznej i Metalurgii Chemicznej - budynek A3
-			</p>
-		</div>
-		<div class="main__info">
-			<p class="main__info-first">
-				Kierownik Katedry:
-				<span class="main__info-first--bold">Prof. dr hab. inż. Paweł Pohl</span>
-			</p>
-			<address>
-				<p>Katedra Chemii Analitycznej i Metalurgii Chemicznej (K14W03D10)</p>
-				<p>Wydział Chemiczny</p>
-				<p>Politechnika Wrocławska</p>
-				<p aria-hidden="true">Wyb. Wyspiańskiego 27</p>
-				<p class="sr-only">Wybrzeże Wyspiańskiego 27</p>
-				<p>53-370 Wrocław</p>
-				<p>tel. 071 320 24 94</p>
-			</address>
-		</div>
+<BaseLayout
+	title="Katedra chemii analitycznej i metalurgii chemicznej"
+	mainHeading="Katedra Chemii Analitycznej i Metalurgii Chemicznej"
+	centered={true}
+>
+	<div class="main__building-content">
+		<picture>
+			<source srcset="img/building.webp">
+			<img
+				src="/img/building.jpg"
+				alt="Zdjęcie budynku A3, będącego głównym budynkiem Katedry Chemii Analitycznej i Metalurgii Chemicznej"
+				class="main__building-img"
+			/>
+		</picture>
+		<p class="main__building-img-overlay" aria-hidden="true">
+			Katedra Chemii Analitycznej i Metalurgii Chemicznej - budynek A3
+		</p>
+	</div>
+	<div class="main__info">
+		<p class="main__info-first">
+			Kierownik Katedry:
+			<span class="main__info-first--bold">Prof. dr hab. inż. Paweł Pohl</span>
+		</p>
+		<address>
+			<p>Katedra Chemii Analitycznej i Metalurgii Chemicznej (K14W03D10)</p>
+			<p>Wydział Chemiczny</p>
+			<p>Politechnika Wrocławska</p>
+			<p aria-hidden="true">Wyb. Wyspiańskiego 27</p>
+			<p class="sr-only">Wybrzeże Wyspiańskiego 27</p>
+			<p>53-370 Wrocław</p>
+			<p>tel. 071 320 24 94</p>
+		</address>
 	</div>
 </BaseLayout>
 
@@ -59,7 +58,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
 		&__info {
 			&-first {
-				margin-block-end: 1rem;
+				margin-block: 1rem;
 
 				&--bold {
 					font-weight: 700;

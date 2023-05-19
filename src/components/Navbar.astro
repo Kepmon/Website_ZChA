@@ -17,8 +17,9 @@ const pathname = new URL(Astro.request.url).pathname
 		{navItems.map((item) => (
 			<li class="nav__item-main">
 				<a
+					class="nav__item-main-link"
 					class:list={[{
-						'nav__item-main-link': item.subitems,
+						'nav__item-main-link--with-dropdown': item.subitems,
 						'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
 					}]}
 					href={item.url ? item.url : '#'}
@@ -148,6 +149,7 @@ const pathname = new URL(Astro.request.url).pathname
 			flex-direction: column;
 			align-items: center;
             position: absolute;
+			padding-block-end: 16px;
             inset: 100% 0 auto;
 			max-height: 0;
             background-color: inherit;
@@ -157,23 +159,23 @@ const pathname = new URL(Astro.request.url).pathname
         }
 
         &__item-main {
-            padding-block: 8px;
 			cursor: pointer;
 
 			img {
 				transition: rotate .5s;
 			}
 
-			&:last-child {
-				padding-block-end: 16px;
-			}
-
 			&-link {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				gap: 5px;
+				display: block;
+				padding-block: 8px;
 
+				&--with-dropdown {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 5px;
+				}
+				
 				&[aria-expanded="true"] {
 					img {
 						rotate: 180deg;
@@ -222,15 +224,21 @@ const pathname = new URL(Astro.request.url).pathname
 				flex-direction: row;
 				gap: clamp(0rem, 1vw, 2.5rem);
 				position: static;
+				padding-block-end: 0;
 				max-height: min-content;
 				overflow: visible;
 			}
 
 			&__item-main, &__item-main:last-child {
 				position: relative;
-				padding-block: 24px;
-				padding-inline: clamp(12px, 1.125vw + .3rem, 16px);
 				transition: all .3s;
+			}
+			
+			&__item-main {
+				&-link {
+					padding-block: 24px;
+					padding-inline: clamp(12px, 1.125vw + .3rem, 16px);
+				}
 			}
 
 			&__items-down {
