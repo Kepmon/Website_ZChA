@@ -6,11 +6,26 @@ const pathname = new URL(Astro.request.url).pathname
 
 <nav class="nav">
     <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
-        <span>Menu</span>
-        <svg width="30" height="27" fill="#fff">
-            <rect x="0" y="4" width="26" height="3" rx="2" ry="2" class="hamburger-bar hamburger-bar--top"></rect>
-            <rect x="0" y="12" width="26" height="3" rx="2" ry="2" class="hamburger-bar hamburger-bar--middle"></rect>
-            <rect x="0" y="20" width="26" height="3" rx="2" ry="2" class="hamburger-bar hamburger-bar--bottom"></rect>
+        <span data-pointer="none">Menu</span>
+        <svg width="30" height="27" fill="#fff" data-pointer="none">
+            <rect
+				x="0" y="4" width="26" height="3" rx="2" ry="2"
+				class="hamburger-bar hamburger-bar--top"
+				data-pointer="none"
+			>
+			</rect>
+            <rect
+				x="0" y="12" width="26" height="3" rx="2" ry="2"
+				class="hamburger-bar hamburger-bar--middle"
+				data-pointer="none"
+			>
+			</rect>
+            <rect
+				x="0" y="20" width="26" height="3" rx="2" ry="2"
+				class="hamburger-bar hamburger-bar--bottom"
+				data-pointer="none"
+			>
+			</rect>
         </svg>
     </button>
 	<ul class="nav__items" id="nav-items">
@@ -26,8 +41,13 @@ const pathname = new URL(Astro.request.url).pathname
 					aria-controls={item.subitems ? item.id : undefined}
 					aria-expanded={item.subitems ? 'false' : undefined}
 				>
-					{item.subitems ? <span>{item.name}</span> : item.name}
-					{item.subitems && <img src="/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć więcej opcji" />}
+					{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
+					{item.subitems
+						&& <img
+							src="/img/down-arrow.svg"
+							alt="Kliknij tutaj żeby rozwinąć więcej opcji"
+							data-pointer="none"
+						/>}
 				</a>
 				{item.subitems &&
 					<ul class="nav__items-down" id={item.id}>
@@ -60,7 +80,6 @@ const pathname = new URL(Astro.request.url).pathname
 		
 	const setAriaForMenuButton = () => {
 		setAriaValues(menuButton)
-		closeOpenedDropdowns()
 	}
 
 	const setAriaForDropdowns = (activeParent: HTMLLIElement) => {
@@ -73,8 +92,12 @@ const pathname = new URL(Astro.request.url).pathname
 		})
 	}
 
-	const closeOpenedDropdowns = () => {
-		menuItemsWithDropdowns.forEach((item) => {
+	const closeItemOnClickingOutside = (e: Event, items: [...HTMLAnchorElement[], HTMLDivElement]) => {
+		const isOneOfItemsClicked = items.some((item) => e.target === item)
+		
+		if (isOneOfItemsClicked) return
+
+		items.forEach((item) => {
 			item.setAttribute('aria-expanded', 'false')
 		})
 	}
@@ -83,6 +106,8 @@ const pathname = new URL(Astro.request.url).pathname
 		parent.addEventListener('click', () => setAriaForDropdowns(parent))
 	})
 	menuButton.addEventListener('click', setAriaForMenuButton)
+	window.addEventListener('click', (e: Event) =>
+		closeItemOnClickingOutside(e, [...menuItemsWithDropdowns, menuButton]))
 </script>
 
 
@@ -205,6 +230,10 @@ const pathname = new URL(Astro.request.url).pathname
 			}
 		}
     }
+
+	[data-pointer="none"] {
+		pointer-events: none;
+	}
 
 	.active-page {
 		font-weight: bold;
