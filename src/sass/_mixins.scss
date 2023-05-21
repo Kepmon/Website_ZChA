@@ -1,3 +1,17 @@
+@mixin hidden-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s;
+}
+
+@mixin flex($gap, $direction: row, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+    align-items: $align;
+    gap: $gap;
+}
+
 @mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle) {
     @keyframes #{$name} {
         #{$start} {

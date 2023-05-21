@@ -24,19 +24,15 @@
 
 <style lang="scss">
 @use 'src/sass/_colors.scss' as *;
+@use 'src/sass/_mixins.scss' as *;
 
     .header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
+        @include flex(32px, column);
         padding: 1.5rem 2rem;
         background-color: var(--header-bg);
 
         &__logo {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
+            @include flex(8px);
 
             &-img {
                 height: 3rem;
@@ -50,14 +46,11 @@
         }
 
         &__options {
-            display: flex;
-            gap: 2rem;
+            @include flex(32px);
         }
 
         &__option {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
+            @include flex(8px);
 
             &-icon {
                 width: 20px;

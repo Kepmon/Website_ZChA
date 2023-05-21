@@ -64,19 +64,12 @@ const pathname = new URL(Astro.request.url).pathname
 </nav>
 
 <script>
+	import { setAriaValues } from '../ts/ariaValues'
+
 	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLDivElement
 	const menuItemsWithDropdowns =
 		[...document.querySelectorAll('.nav__item-main-link[aria-expanded]')] as HTMLAnchorElement[]
 	const linkParents = menuItemsWithDropdowns.map(item => item.closest('li') as HTMLLIElement)
-
-	type Element = HTMLDivElement | HTMLAnchorElement
-	const setAriaValues = (element: Element) => {
-		if (element.getAttribute('aria-expanded') === 'false') {
-			element.setAttribute('aria-expanded', 'true')
-			return
-		}
-		element.setAttribute('aria-expanded', 'false')
-	}
 		
 	const setAriaForMenuButton = () => {
 		setAriaValues(menuButton)
@@ -119,16 +112,13 @@ const pathname = new URL(Astro.request.url).pathname
 	@include animation-mixin(rotate-left-back, 100%, 0%, 20, 10, -45deg);
 
     .nav {
-        display: flex;
-        justify-content: center;
+		@include flex(0);
         position: relative;
         padding: 1rem;
         background-color: var(--main-color);
 
         &__mobile-menu {
-            display: flex;
-            gap: 10px;
-            align-items: center;
+			@include flex(10px);
 			
 			.hamburger-bar {
 				&--top, &--bottom {
@@ -170,16 +160,12 @@ const pathname = new URL(Astro.request.url).pathname
         }
 
         &__items {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
+			@include flex(0, column);
+			@include hidden-content;
             position: absolute;
             inset: 100% 0 auto;
-			max-height: 0;
             background-color: inherit;
-			overflow: hidden;
             z-index: 10;
-			transition: max-height .5s;
         }
 
         &__item-main {
@@ -194,10 +180,7 @@ const pathname = new URL(Astro.request.url).pathname
 				padding-block: 8px;
 
 				&--with-dropdown {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					gap: 5px;
+					@include flex(5px);
 				}
 				
 				&[aria-expanded="true"] {
@@ -214,12 +197,10 @@ const pathname = new URL(Astro.request.url).pathname
         }
 
         &__items-down {
-			max-height: 0;
-			overflow: hidden;
+			@include hidden-content;
             border-radius: .5rem;
             text-align: center;
             background-color: var(--red-color);
-			transition: all .5s;
         }
 
 		&__item-down {

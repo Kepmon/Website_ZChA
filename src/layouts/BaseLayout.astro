@@ -45,6 +45,7 @@ const { mainHeading, title, centered } = Astro.props
 <style is:global lang="scss">
 	@use 'src/sass/_colors.scss' as *;
 	@use 'src/sass/_fontface.scss' as *;
+	@use 'src/sass/_mixins.scss' as *;
 
 	* {
 		box-sizing: border-box;
@@ -127,16 +128,12 @@ const { mainHeading, title, centered } = Astro.props
 	}
 
 	.page-container {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
+		@include flex(2rem, column, strech);
 		min-height: 100vh;
 	}
 
 	.container {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+		@include flex(16px, column, strech);
 		margin-inline: auto;
 		padding: 1rem;
 		max-width: 1200px;
