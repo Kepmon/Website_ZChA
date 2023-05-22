@@ -11,16 +11,44 @@
 	</a>
 
 	<div class="header__options">
-		<button class="header__option">
+		<button class="header__option theme-button">
             <img src="img/pallete.svg" alt="" class="header__option-icon">
             <span>Zmień motyw</span>
         </button>
-		<button class="header__option">
+		<button class="header__option language-button">
             <img src="img/language.svg" alt="" class="header__option-icon">
             <span>English version</span>
         </button>
 	</div>
 </header>
+
+<script>
+    const body = document.querySelector('body') as HTMLBodyElement
+    const themeButton = document.querySelector('.theme-button') as HTMLButtonElement
+
+    const setDataMode = () => {
+        localStorage.getItem('theme') === 'dark' ? body.dataset.mode = 'dark' : body.dataset.mode = 'light'
+    }
+
+    const setThemeOnPageLoad = () => {
+        if (localStorage.getItem('theme') == null) return
+
+        setDataMode()
+    }
+
+    const setThemeOnButtonClick = () => {
+        if (localStorage.getItem('theme') == null || localStorage.getItem('theme') == 'dark') {
+            localStorage.setItem('theme', 'light')
+        } else {
+            localStorage.setItem('theme', 'dark')
+        }
+
+        setDataMode()
+    }
+
+    window.addEventListener('DOMContentLoaded', setThemeOnPageLoad)
+    themeButton.addEventListener('click', setThemeOnButtonClick)
+</script>
 
 <style lang="scss">
 @use 'src/sass/_colors.scss' as *;
@@ -29,6 +57,7 @@
     .header {
         @include flex(32px, column);
         padding: 1.5rem 2rem;
+        color: var(--no-theme-text);
         background-color: var(--header-bg);
 
         &__logo {
@@ -40,6 +69,7 @@
 
             &-text {
                 text-align: center;
+                color: var(--no-theme-text);
                 // fallback for browsers that don't support @container or @supports
                 font-size: clamp(1rem, 3vw + .5rem, 1.3rem);
             }
