@@ -13,7 +13,7 @@ interface NavSubitem {
 export const navItems: NavItem[] = [
     {
         name: 'Strona główna',
-        url: '/'
+        url: '/Website_ZChA/'
     },
     {
         name: 'Dydaktyka',
@@ -21,21 +21,21 @@ export const navItems: NavItem[] = [
         subitems: [
             {
                 name: 'Studia inżynierskie I stopnia',
-                url: '/dydaktyka_I_stopien'
+                url: '/Website_ZChA/dydaktyka_I_stopien'
             },
             {
                 name: 'Studia inżynierskie niestacjonarne',
-                url: '/dydaktyka_niestacjonarne'
+                url: '/Website_ZChA/dydaktyka_niestacjonarne'
             },
             {
                 name: 'Studia magisterskie II stopnia',
-                url: '/dydaktyka_II_stopien'
+                url: '/Website_ZChA/dydaktyka_II_stopien'
             }
         ]
     },
     {
         name: 'Specjalność',
-        url: '/specjalnosc',
+        url: '/Website_ZChA/specjalnosc',
     },
     {
         name: 'Pracownicy',
@@ -43,28 +43,28 @@ export const navItems: NavItem[] = [
         subitems: [
             {
                 name: 'Zespół Chemii Analitycznej',
-                url: '/zespol_chemii_analitycznej'
+                url: '/Website_ZChA/zespol_chemii_analitycznej'
             },
             {
                 name: 'Zespół metalurgii chemicznej',
-                url: '/zespol_metalurgii'
+                url: '/Website_ZChA/zespol_metalurgii'
             },
             {
                 name: 'Doktoranci',
-                url: '/doktoranci'
+                url: '/Website_ZChA/doktoranci'
             },
             {
                 name: 'Konsultacje',
-                url: '/konsultacje'
+                url: '/Website_ZChA/konsultacje'
             }
         ]
     },
     {
         name: 'Badania',
-        url: '/badania',
+        url: '/Website_ZChA/badania',
     },
     {
         name: 'Laboratoria',
-        url: '/laboratoria',
+        url: '/Website_ZChA/laboratoria',
     },
 ]
