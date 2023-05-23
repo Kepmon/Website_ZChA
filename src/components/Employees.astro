@@ -1,0 +1,54 @@
+---
+import { employees } from '../ts/employees.ts'
+
+interface Props {
+    employeeGroup: 'analyticalChemistry' | 'metallurgy' | 'phdStudents'
+}
+
+const { employeeGroup } = Astro.props
+---
+
+<div class="employee__items">
+    {employees[employeeGroup].map((employee) => (
+        <div class="employee__item">
+            <img
+                src={employee.gender === 'male' ? 'img/employee_male.png' : 'img/employee_female.png'}
+                alt="Zdjęcie pracownika"
+                class="employee__item-photo"
+            />
+            <div class="employee__item-info">
+                <p class="employee__item-name">{employee.name}</p>
+                <p>pok. {employee.office}</p>
+                {employee.phone && <p>tel. (071) 320 {employee.phone}</p>}
+                <p>e-mail: {employee.email}</p>
+            </div>
+        </div>
+    ))}
+</div>
+
+<style lang="scss">
+    .employee {
+		&__items {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+            gap: 3.5rem;
+			margin-top: 3rem;
+        }
+
+        &__item {
+            text-align: center;
+
+            &-photo {
+                margin-block-end: 1rem;
+                margin-inline: auto;
+                max-width: 170px;
+            }
+
+            &-name {
+                margin-block-end: 1rem;
+                font-weight: bold;
+            }
+        }
+    }
+</style>

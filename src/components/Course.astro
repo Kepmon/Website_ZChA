@@ -1,0 +1,74 @@
+---
+const { courseTitle } = Astro.props
+---
+
+<div class="course">
+    <button class="course__title" aria-expanded="false" aria-controls="course-content">
+        <span>{courseTitle}</span>
+        <img src="/Website_ZChA/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć zawartość tego kursu">
+    </button>
+    <div class="course__content" id="course-content">
+        <div class="course__content-wrapper">
+            <slot></slot>
+        </div>
+    </div>
+</div>
+
+<script>
+    import { setAriaValues } from '../ts/ariaValues.ts'
+
+    const courseTitles = [...document.querySelectorAll('.course__title')] as HTMLButtonElement[]
+
+    courseTitles.forEach((title) => {
+        title.addEventListener('click', () => setAriaValues(title))
+    })
+</script>
+
+<style lang="scss">
+    @use '../sass/mixins' as *;
+
+    .course {
+        &__title,
+		&__content-wrapper {
+            padding: .8rem;
+            background-color: var(--main-color);
+            border: 5px ridge var(--red-color);
+			border-radius: 10px;
+		}
+
+        &__title {
+            @include flex(8px);
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+
+            img {
+                transition: rotate .5s;
+            }
+
+            &[aria-expanded="true"] + .course__content {
+                max-height: 1000vh;
+            }
+            
+            &[aria-expanded="true"] img {
+                rotate: 180deg;
+            }
+        }
+
+        &__content {
+            @include hidden-content;
+        }
+    }
+
+    @media (width > 640px) {
+        .course {
+            &__title {
+                font-size: 1rem;
+
+                img {
+                    scale: 1.2;
+                }
+            }
+        }
+    }
+</style>

@@ -1,0 +1,265 @@
+---
+import { navItems } from '../ts/navItems.ts'
+
+const pathname = new URL(Astro.request.url).pathname
+---
+
+<nav class="nav">
+    <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
+        <span data-pointer="none">Menu</span>
+        <svg width="30" height="27" fill="#fff" data-pointer="none">
+            <rect
+				x="0" y="4" width="26" height="3" rx="2" ry="2"
+				class="hamburger-bar hamburger-bar--top"
+				data-pointer="none"
+			>
+			</rect>
+            <rect
+				x="0" y="12" width="26" height="3" rx="2" ry="2"
+				class="hamburger-bar hamburger-bar--middle"
+				data-pointer="none"
+			>
+			</rect>
+            <rect
+				x="0" y="20" width="26" height="3" rx="2" ry="2"
+				class="hamburger-bar hamburger-bar--bottom"
+				data-pointer="none"
+			>
+			</rect>
+        </svg>
+    </button>
+	<ul class="nav__items" id="nav-items">
+		{navItems.map((item) => (
+			<li class="nav__item-main">
+				<a
+					class="nav__item-main-link"
+					class:list={[{
+						'nav__item-main-link--with-dropdown': item.subitems,
+						'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
+					}]}
+					href={item.url ? item.url : '#'}
+					aria-controls={item.subitems ? item.id : undefined}
+					aria-expanded={item.subitems ? 'false' : undefined}
+				>
+					{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
+					{item.subitems
+						&& <img
+							src="/Website_ZChA/img/down-arrow.svg"
+							alt="Kliknij tutaj żeby rozwinąć więcej opcji"
+							data-pointer="none"
+						/>}
+				</a>
+				{item.subitems &&
+					<ul class="nav__items-down" id={item.id}>
+						{item.subitems.map((subitem) => (
+							<li class="nav__item-down">
+								<a class="nav__item-down-link" href={subitem.url}>{subitem.name}</a>
+							</li>
+						))}
+					</ul>
+				}
+			</li>
+		))}
+	</ul>
+</nav>
+
+<script>
+	import { setAriaValues } from '../ts/ariaValues'
+
+	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLDivElement
+	const menuItemsWithDropdowns =
+		[...document.querySelectorAll('.nav__item-main-link[aria-expanded]')] as HTMLAnchorElement[]
+	const linkParents = menuItemsWithDropdowns.map(item => item.closest('li') as HTMLLIElement)
+		
+	const setAriaForMenuButton = () => {
+		setAriaValues(menuButton)
+	}
+
+	const setAriaForDropdowns = (activeParent: HTMLLIElement) => {
+		menuItemsWithDropdowns.forEach(item => {
+			if (item.parentElement !== activeParent) {
+				item.setAttribute('aria-expanded', 'false')
+				return
+			}
+			setAriaValues(item)
+		})
+	}
+
+	const closeItemOnClickingOutside = (e: Event, items: [...HTMLAnchorElement[], HTMLDivElement]) => {
+		const isOneOfItemsClicked = items.some((item) => e.target === item)
+		
+		if (isOneOfItemsClicked) return
+
+		items.forEach((item) => {
+			item.setAttribute('aria-expanded', 'false')
+		})
+	}
+
+	linkParents.forEach(parent => {
+		parent.addEventListener('click', () => setAriaForDropdowns(parent))
+	})
+	menuButton.addEventListener('click', setAriaForMenuButton)
+	window.addEventListener('click', (e: Event) =>
+		closeItemOnClickingOutside(e, [...menuItemsWithDropdowns, menuButton]))
+</script>
+
+
+<style lang="scss">
+	@use '../sass/mixins' as *;
+	@include animation-mixin(rotate-right, 0%, 100%, 4, 13, 45deg);
+	@include animation-mixin(rotate-left, 0%, 100%, 20, 10, -45deg);
+	@include animation-mixin(rotate-right-back, 100%, 0%, 4, 13, 45deg);
+	@include animation-mixin(rotate-left-back, 100%, 0%, 20, 10, -45deg);
+
+    .nav {
+		@include flex(0);
+        position: relative;
+        padding: 1rem;
+        background-color: var(--main-color);
+
+        &__mobile-menu {
+			@include flex(10px);
+			
+			.hamburger-bar {
+				&--top, &--bottom {
+					transform-origin: center;
+				}
+			}
+
+			:active {
+				.hamburger-bar {
+					&--top {
+						animation: rotate-right-back .5s forwards;
+					}
+		
+					&--bottom {
+						animation: rotate-left-back .5s forwards;
+					}
+				}
+			}
+
+			&[aria-expanded="true"] {
+				.hamburger-bar {
+					&--middle {
+						opacity: 0;
+					}
+	
+					&--top {
+						animation: rotate-right .5s forwards;
+					}
+	
+					&--bottom {
+						animation: rotate-left .5s forwards;
+					}
+				}
+			}
+
+			&[aria-expanded="true"] + .nav__items {
+				max-height: 500px;
+			}
+        }
+
+        &__items {
+			@include flex(0, column);
+			@include hidden-content;
+            position: absolute;
+            inset: 100% 0 auto;
+            background-color: inherit;
+            z-index: 10;
+        }
+
+        &__item-main {
+			cursor: pointer;
+
+			img {
+				transition: rotate .5s;
+			}
+
+			&-link {
+				display: block;
+				padding-block: 8px;
+
+				&--with-dropdown {
+					@include flex(5px);
+				}
+				
+				&[aria-expanded="true"] {
+					img {
+						rotate: 180deg;
+					}
+				}
+
+				&[aria-expanded="true"] + .nav__items-down {
+					margin-block-start: 10px;
+					max-height: 200px;
+				}
+			}
+        }
+
+        &__items-down {
+			@include hidden-content;
+            border-radius: .5rem;
+            text-align: center;
+            background-color: var(--red-color);
+        }
+
+		&__item-down {
+			&-link {
+				display: block;
+				padding-block: 8px;
+				padding-inline: 16px;
+			}
+		}
+    }
+
+	[data-pointer="none"] {
+		pointer-events: none;
+	}
+
+	.active-page {
+		font-weight: bold;
+		text-shadow: 1px 1px 5px var(--text-shadow);
+	}
+
+    @media (width > 768px) {
+        .nav {
+			padding-block: 0;
+
+            &__mobile-menu {
+                display: none;
+            }
+
+			&__items {
+				flex-direction: row;
+				gap: clamp(0rem, 1vw, 2.5rem);
+				position: static;
+				padding-block-end: 0;
+				max-height: min-content;
+				overflow: visible;
+			}
+
+			&__item-main, &__item-main:last-child {
+				position: relative;
+				transition: all .3s;
+			}
+			
+			&__item-main {
+				&-link {
+					padding-block: 24px;
+					padding-inline: clamp(12px, 1.125vw + .3rem, 16px);
+				}
+			}
+
+			&__items-down {
+				position: absolute;
+				inset: 100% -50% auto;
+				margin-block: 5px;
+				background-color: var(--main-color);
+			}
+
+			&__item-main:hover, &__item-down:hover {
+				background-color: var(--red-color);
+			}
+        }
+    }
+</style>

@@ -1,0 +1,125 @@
+<header class="header">
+	<a href="/" class="header__logo">
+		<img
+			src="/Website_ZChA/img/Kolba_sama.gif"
+			alt="Obrazek do logo - wrzący roztwór w kolbie"
+			class="header__logo-img"
+		/>
+		<span class="header__logo-text">
+			Katedra Chemii Analitycznej i Metalurgii Chemicznej
+		</span>
+	</a>
+
+	<div class="header__options">
+		<button class="header__option theme-button">
+            <img src="img/pallete.svg" alt="" class="header__option-icon">
+            <span>Zmień motyw</span>
+        </button>
+		<button class="header__option language-button">
+            <img src="img/language.svg" alt="" class="header__option-icon">
+            <span>English version</span>
+        </button>
+	</div>
+</header>
+
+<script>
+    const body = document.querySelector('body') as HTMLBodyElement
+    const themeButton = document.querySelector('.theme-button') as HTMLButtonElement
+
+    const setDataMode = () => {
+        localStorage.getItem('theme') === 'dark' ? body.dataset.mode = 'dark' : body.dataset.mode = 'light'
+    }
+
+    const setThemeOnPageLoad = () => {
+        if (localStorage.getItem('theme') == null) return
+
+        setDataMode()
+    }
+
+    const setThemeOnButtonClick = () => {
+        if (localStorage.getItem('theme') == null || localStorage.getItem('theme') == 'dark') {
+            localStorage.setItem('theme', 'light')
+        } else {
+            localStorage.setItem('theme', 'dark')
+        }
+
+        setDataMode()
+    }
+
+    window.addEventListener('DOMContentLoaded', setThemeOnPageLoad)
+    themeButton.addEventListener('click', setThemeOnButtonClick)
+</script>
+
+<style lang="scss">
+@use 'src/sass/_colors.scss' as *;
+@use 'src/sass/_mixins.scss' as *;
+
+    .header {
+        @include flex(32px, column);
+        padding: 1.5rem 2rem;
+        color: var(--no-theme-text);
+        background-color: var(--header-bg);
+
+        &__logo {
+            @include flex(8px);
+
+            &-img {
+                height: 3rem;
+            }
+
+            &-text {
+                text-align: center;
+                color: var(--no-theme-text);
+                // fallback for browsers that don't support @container or @supports
+                font-size: clamp(1rem, 3vw + .5rem, 1.3rem);
+            }
+        }
+
+        &__options {
+            @include flex(32px);
+        }
+
+        &__option {
+            @include flex(8px);
+
+            &-icon {
+                width: 20px;
+            }
+        }
+    }
+
+    @media (width > 640px) {
+        .header {
+            justify-content: space-between;
+            flex-direction: row;
+
+            &__logo {
+                gap: 1rem;
+
+                &-text {
+                    text-align: start;
+                }
+            }
+        }
+    }
+
+    @supports (container-type: inline-size) {
+        .header__logo {
+            container-type: inline-size;
+            justify-content: center;
+            width: 80%;
+
+            &-text {
+                font-size: clamp(1rem, 3cqi + .5rem, 1.3rem);
+            }
+        }
+
+        @media (width > 640px) {
+            .header__logo {
+                justify-content: start;
+                width: auto;
+                flex-grow: 1;
+            }
+        }
+    }
+</style>
