@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { officeHours } from '../ts/officeHours.ts'
+---
+
+<BaseLayout
+    title="Konsultacje | Katedra chemii analitycznej i metalurgii chemicznej"
+    mainHeading="Konsultacje w semestrze zimowym 2022/23"
+>
+    <table class="employee__table">
+        <thead class="employee__table-header">
+            <th class="employee__table-th">Pracownik</th>
+            <th class="employee__table-th">Dzień</th>
+            <th class="employee__table-th">Godziny</th>
+        </thead>
+        <tbody class="employee__table-body">
+            {officeHours.map((employee) => (
+                <tr class="employee__table-tr">
+                    <td data-cell="pracownik" class="employee__table-td" rowspan={employee.dayTwo && '2'}>
+                        {employee.employeeName}
+                    </td>
+                    <td data-cell="dzień" class="employee__table-td">{employee.dayOne}</td>
+                    <td data-cell="godziny" class="employee__table-td">{employee.dayOneHours}</td>
+                    {employee.dayTwo
+                        && <tr class="employee__table-tr">
+                            <td data-cell="dzień" class="employee__table-td">{employee.dayTwo}</td>
+                            <td data-cell="godziny" class="employee__table-td">{employee.dayTwoHours}</td>
+                        </tr>
+                    }
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</BaseLayout>
+
+<style lang="scss">
+    .employee {
+        &__table {
+            margin: 0 auto;
+            background-color: var(--table-color);
+
+            &-th {
+                display: none;
+                text-align: center;
+            }
+
+            &-td {
+                display: block;
+                padding: 4px 8px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            &-td:last-child {
+                border-bottom: 3px ridge var(--red-color);
+            }
+
+            &-td::before {
+                content: attr(data-cell) ': ';
+                text-transform: capitalize;
+                font-weight: normal;
+            }
+        }
+    }
+
+    @media (width > 480px) {
+        .employee {
+            &__table,
+            &__table-th,
+            &__table-td {
+                padding: 8px 24px;
+                border: 3px ridge var(--red-color);
+                border-collapse: collapse;
+            }
+
+            &__table {
+                margin: 0 auto;
+                background-color: var(--table-color);
+
+                &-th, &-td {
+                    display: revert;
+                }
+
+                &-td {
+                    font-weight: normal;
+                }
+
+                &-td::before {
+                    content: '';
+                }
+            }
+        }
+    }
+</style>

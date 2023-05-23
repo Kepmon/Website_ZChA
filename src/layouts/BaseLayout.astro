@@ -1,0 +1,161 @@
+---
+import Header from '../components/Header.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+
+interface Props {
+	title: string,
+	mainHeading: string
+	centered?: true
+}
+
+const { mainHeading, title, centered } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/Website_ZChA/img/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="keywords" content="chemia analityczna, próbki środowiskowe, analiza próbek, metody fizykochemiczne, plazma ICP, chemia, chemik, analiza spektralna, metody analizy, ICP, ASA, chromatrografia, plazma, plasma, CVD, PACVD, PECVD, atomowa spektrometria absorpcyjna, XRD, dyfrakcja proszkowa">
+		<meta name="description" content="Strona Katedry Chemii Analitycznej i Metalurgii Chemicznej Wydziału Chemicznego Politechniki Wrocławskiej. Na stronie można znaleźć materiały dydaktyczne do kursów prowadzonych przez pracowników Katedry, dane kontaktowe pracowników i doktorantów, terminy konsultacji, szczegółowy opis wyposażenia laboratoriów należących do Katedry oraz informacje dotyczące tematyki badań prowadzonych w Katedrze.">
+		<title>{title}</title>
+	</head>
+
+	<body data-mode="dark">
+		<a href="#main" class="skip-to-main-content-link">Przejdź do zawartości głównej</a>
+		<div class="page-container">
+			<div>
+				<Header />
+				<Navbar />
+			</div>
+			<main class="main" id="main">
+				<div class="container" class:list={[{ 'container--centered': centered }]}>
+					<h1>{mainHeading}</h1>
+					<slot />
+				</div>
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>
+
+<style is:global lang="scss">
+	@use 'src/sass/_colors.scss' as *;
+	@use 'src/sass/_fontface.scss' as *;
+	@use 'src/sass/_mixins.scss' as *;
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		font-family: 'Lato', sans-serif;
+		color: var(--text);
+		background-color: var(--background-color);
+		font-size: 0.85rem;
+		line-height: 1.5;
+	}
+
+	a {
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	address {
+		font-style: normal;
+	}
+
+	button {
+		background: none;
+		border: none;
+		color: inherit;
+	}
+
+	h1 {
+		font-size: clamp(1.4rem, 3vw + .5rem, 2.2rem);
+		text-shadow: 2px 2px 5px var(--text-shadow);
+		text-align: center;
+		color: var(--main-color);
+	}
+
+	h2 {
+		margin-bottom: 1rem;
+		font-size: clamp(1rem, 1vw + .5rem, 1.3rem);
+		text-shadow: 2px 2px 5px var(--text-shadow);
+		text-align: center;
+	}
+
+	img,
+	picture,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	main {
+		flex-grow: 1;
+	}
+
+	ol, ul {
+		list-style: none;
+	}
+
+	.skip-to-main-content-link {
+		display: block;
+		position: absolute;
+		inset: auto 0;
+		margin: 0 auto;
+		padding: 16px;
+		width: max-content;
+		background-color: var(--no-theme-text);
+		color: var(--header-bg);
+		font-weight: bold;
+		border-radius: 16px;
+		z-index: 100;
+		translate: 0 -100px 0;
+		transition: translate .5s;
+	}
+
+	.skip-to-main-content-link:focus {
+		outline: none;
+		box-shadow: 0px 0px 10px var(--no-theme-text);
+		translate: 0 20px 0;
+	}
+
+	.page-container {
+		@include flex(2rem, column, strech);
+		min-height: 100vh;
+	}
+
+	.container {
+		@include flex(16px, column, strech);
+		margin-inline: auto;
+		padding: 1rem;
+		max-width: 1200px;
+		background-image: var(--container-background);
+		border: 5px ridge var(--main-color);
+		border-radius: 8px;
+		text-align: center;
+	}
+
+	@media (width > 640px) {
+		body {
+			font-size: 1rem;
+		}
+
+		.container {
+			gap: 2rem;
+			padding: 2rem;
+			text-align: justify;
+
+			&--centered {
+				text-align: center;
+			}
+		}
+	}
+</style>
