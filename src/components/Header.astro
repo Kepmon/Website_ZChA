@@ -57,8 +57,7 @@
     .header {
         @include flex(32px, column);
         padding: 1.5rem 2rem;
-        color: var(--no-theme-text);
-        background-color: var(--header-bg);
+        background-color: var(--black-color);
 
         &__logo {
             @include flex(8px);
@@ -69,7 +68,6 @@
 
             &-text {
                 text-align: center;
-                color: var(--no-theme-text);
                 // fallback for browsers that don't support @container or @supports
                 font-size: clamp(1rem, 3vw + .5rem, 1.3rem);
             }

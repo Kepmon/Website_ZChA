@@ -1,5 +1,6 @@
 ---
 import { navItems } from '../ts/navItems.ts'
+import DownArrow from './svgs/DownArrow.astro'
 
 const pathname = new URL(Astro.request.url).pathname
 ---
@@ -43,13 +44,18 @@ const pathname = new URL(Astro.request.url).pathname
 						aria-expanded={item.subitems ? 'false' : undefined}
 					>
 						{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
-						{item.subitems
-							&& <img
-								src="/Website_ZChA/img/down-arrow.svg"
-								alt="Kliknij tutaj żeby rozwinąć więcej opcji"
-								data-pointer="none"
-							/>}
-					</a>
+						{item.subitems && 
+							<svg
+								width="12px"
+								height="12px"
+								viewBox="0 0 1024 1024"
+								class="icon"
+								version="1.1"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
+							</svg>}
+						</a>
 					{item.subitems &&
 						<ul class="nav__items-down" id={item.id}>
 							<div class="nav__items-down-container">
@@ -126,7 +132,7 @@ const pathname = new URL(Astro.request.url).pathname
 		@include flex(0);
         position: relative;
         padding: 1rem;
-        background-color: var(--main-color);
+        background-color: var(--yellow-color);
 
         &__mobile-menu {
 			@include flex(10px);
@@ -187,20 +193,22 @@ const pathname = new URL(Astro.request.url).pathname
 			text-align: center;
 			cursor: pointer;
 
-			img {
+			svg {
+				fill: var(--black-color);
 				transition: rotate .5s;
 			}
 
 			&-link {
 				display: block;
 				padding-block: 8px;
+				color: var(--black-color);
 
 				&--with-dropdown {
 					@include flex(5px);
 				}
 				
 				&[aria-expanded="true"] {
-					img {
+					svg {
 						rotate: 180deg;
 					}
 				}
@@ -217,6 +225,7 @@ const pathname = new URL(Astro.request.url).pathname
             border-radius: .5rem;
             text-align: center;
             background-color: var(--red-color);
+			color: var(--black-color);
 
 			&-container {
 				overflow: hidden;
@@ -238,7 +247,6 @@ const pathname = new URL(Astro.request.url).pathname
 
 	.active-page {
 		font-weight: 700;
-		text-shadow: 1px 1px 5px var(--text-shadow);
 	}
 
     @media (width > 768px) {
@@ -278,7 +286,7 @@ const pathname = new URL(Astro.request.url).pathname
 				position: absolute;
 				inset: 100% -50% auto;
 				margin-block: 5px;
-				background-color: var(--main-color);
+				background-color: var(--yellow-color);
 			}
 
 			&__item-main:hover, &__item-down:hover {

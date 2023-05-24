@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Course from '../components/Course.astro'
+import Download from '../components/svgs/Download.astro'
+import ExternalLink from '../components/svgs/ExternalLink.astro'
 ---
 
 <BaseLayout
@@ -15,10 +17,7 @@ import Course from '../components/Course.astro'
                 class="course__link"
             >
                 <span>Karta przedmiotu</span>
-                <img
-                    src="/Website_ZChA/img/download.svg"
-                    alt="Kliknij tutaj aby pobrać"
-                >
+                <Download />
             </a>
 
             <p class="course__lectures">Wykłady do pobrania:</p>
@@ -29,10 +28,7 @@ import Course from '../components/Course.astro'
                     class="course__link"
                 >
                     <span>Wykład 1</span>
-                    <img
-                        src="/Website_ZChA/img/external-link.svg"
-                        alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                    >
+                    <ExternalLink />
                 </a>
             </li>
             <li class="course__item">
@@ -42,10 +38,7 @@ import Course from '../components/Course.astro'
                     class="course__link"
                 >
                     <span>Wykład 2</span>
-                    <img
-                        src="/Website_ZChA/img/external-link.svg"
-                        alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                    >
+                    <ExternalLink />
                 </a>
             </li>
             <li class="course__item">
@@ -55,10 +48,7 @@ import Course from '../components/Course.astro'
                     class="course__link"
                 >
                     <span>Wykład 3</span>
-                    <img
-                        src="/Website_ZChA/img/external-link.svg"
-                        alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                    >
+                    <ExternalLink />
                 </a>
             </li>
             <li class="course__item">
@@ -68,10 +58,7 @@ import Course from '../components/Course.astro'
                     class="course__link"
                 >
                     <span>Wykład 4</span>
-                    <img
-                        src="/Website_ZChA/img/external-link.svg"
-                        alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                    >
+                    <ExternalLink />
                 </a>
             </li>
             <li class="course__item margin-bottom">
@@ -81,10 +68,7 @@ import Course from '../components/Course.astro'
                     class="course__link"
                 >
                     <span>Wykład 5</span>
-                    <img
-                        src="/Website_ZChA/img/external-link.svg"
-                        alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                    >
+                    <ExternalLink />
                 </a>
             </li>
 
@@ -236,10 +220,7 @@ import Course from '../components/Course.astro'
                             class="course__link"
                         >
                             <span>3. Wymagania dotyczące sprawozdań z ćwiczeń.</span>
-                            <img
-                                src="/Website_ZChA/img/external-link.svg"
-                                alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                            >
+                            <ExternalLink />
                         </a>
                     </li>
                     <li class="course__item">
@@ -262,10 +243,7 @@ import Course from '../components/Course.astro'
                                 Ćwiczenie 1. Nastawianie miana HCl na węglan sodu i
                                 oznaczanie NaOH.
                             </span>
-                            <img
-                                src="/Website_ZChA/img/external-link.svg"
-                                alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                            >
+                            <ExternalLink />
                         </a>
                     </li>
                     <li class="course__item">
@@ -277,10 +255,7 @@ import Course from '../components/Course.astro'
                             <span>
                             Ćwiczenie 2. Oznaczanie zawartości żelaza i niklu w roztworze.
                             </span>
-                            <img
-                                src="/Website_ZChA/img/external-link.svg"
-                                alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                            >
+                            <ExternalLink />
                         </a>
                     </li>
                     <li class="course__item">
@@ -292,10 +267,7 @@ import Course from '../components/Course.astro'
                             <span>
                                 Ćwiczenie 3. Analiza chemiczna wody.
                             </span>
-                            <img
-                                src="/Website_ZChA/img/external-link.svg"
-                                alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                            >
+                            <ExternalLink />
                         </a>
                     </li>
                     <li class="course__item">
@@ -307,10 +279,7 @@ import Course from '../components/Course.astro'
                             <span>
                                 Lista zadań obliczeniowych.
                             </span>
-                            <img
-                                src="/Website_ZChA/img/external-link.svg"
-                                alt="Kliknij tutaj aby otworzyć link w nowej karcie"
-                            >
+                            <ExternalLink />
                         </a>
                     </li>
                 </ul>
@@ -341,11 +310,6 @@ import Course from '../components/Course.astro'
         &__link {
             @include flex(5px);
             justify-content: start;
-            transition: color 0.5s;
-
-            &:hover {
-                color: var(--red-color);
-            }
         }
 
         &__subheading {
