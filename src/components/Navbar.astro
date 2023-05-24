@@ -29,50 +29,55 @@ const pathname = new URL(Astro.request.url).pathname
         </svg>
     </button>
 	<ul class="nav__items" id="nav-items">
-		{navItems.map((item) => (
-			<li class="nav__item-main">
-				<a
-					class="nav__item-main-link"
-					class:list={[{
-						'nav__item-main-link--with-dropdown': item.subitems,
-						'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
-					}]}
-					href={item.url ? item.url : '#'}
-					aria-controls={item.subitems ? item.id : undefined}
-					aria-expanded={item.subitems ? 'false' : undefined}
-				>
-					{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
-					{item.subitems
-						&& <img
-							src="/Website_ZChA/img/down-arrow.svg"
-							alt="Kliknij tutaj żeby rozwinąć więcej opcji"
-							data-pointer="none"
-						/>}
-				</a>
-				{item.subitems &&
-					<ul class="nav__items-down" id={item.id}>
-						{item.subitems.map((subitem) => (
-							<li class="nav__item-down">
-								<a class="nav__item-down-link" href={subitem.url}>{subitem.name}</a>
-							</li>
-						))}
-					</ul>
-				}
-			</li>
-		))}
+		<div class="nav__items-container">
+			{navItems.map((item) => (
+				<li class="nav__item-main">
+					<a
+						class="nav__item-main-link"
+						class:list={[{
+							'nav__item-main-link--with-dropdown': item.subitems,
+							'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
+						}]}
+						href={item.url ? item.url : '#'}
+						aria-controls={item.subitems ? item.id : undefined}
+						aria-expanded={item.subitems ? 'false' : undefined}
+					>
+						{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
+						{item.subitems
+							&& <img
+								src="/Website_ZChA/img/down-arrow.svg"
+								alt="Kliknij tutaj żeby rozwinąć więcej opcji"
+								data-pointer="none"
+							/>}
+					</a>
+					{item.subitems &&
+						<ul class="nav__items-down" id={item.id}>
+							<div class="nav__items-down-container">
+								{item.subitems.map((subitem) => (
+									<li class="nav__item-down">
+										<a class="nav__item-down-link" href={subitem.url}>{subitem.name}</a>
+									</li>
+								))}
+							</div>
+						</ul>
+					}
+				</li>
+			))}
+		</div>
 	</ul>
 </nav>
 
 <script>
 	import { setAriaValues } from '../ts/ariaValues'
 
-	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLDivElement
+	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLButtonElement
 	const menuItemsWithDropdowns =
 		[...document.querySelectorAll('.nav__item-main-link[aria-expanded]')] as HTMLAnchorElement[]
 	const linkParents = menuItemsWithDropdowns.map(item => item.closest('li') as HTMLLIElement)
 		
 	const setAriaForMenuButton = () => {
 		setAriaValues(menuButton)
+		closeOpenedDropdowns()
 	}
 
 	const setAriaForDropdowns = (activeParent: HTMLLIElement) => {
@@ -85,7 +90,13 @@ const pathname = new URL(Astro.request.url).pathname
 		})
 	}
 
-	const closeItemOnClickingOutside = (e: Event, items: [...HTMLAnchorElement[], HTMLDivElement]) => {
+	const closeOpenedDropdowns = () => {
+		menuItemsWithDropdowns.forEach((item) => {
+			item.setAttribute('aria-expanded', 'false')
+		})
+	}
+
+	const closeItemOnClickingOutside = (e: Event, items: [...HTMLAnchorElement[], HTMLButtonElement]) => {
 		const isOneOfItemsClicked = items.some((item) => e.target === item)
 		
 		if (isOneOfItemsClicked) return
@@ -155,20 +166,25 @@ const pathname = new URL(Astro.request.url).pathname
 			}
 
 			&[aria-expanded="true"] + .nav__items {
-				max-height: 500px;
+				grid-template-rows: 1fr;
 			}
         }
 
         &__items {
-			@include flex(0, column);
 			@include hidden-content;
+			justify-content: center;
             position: absolute;
             inset: 100% 0 auto;
             background-color: inherit;
             z-index: 10;
+
+			&-container {
+				overflow: hidden;
+			}
         }
 
         &__item-main {
+			text-align: center;
 			cursor: pointer;
 
 			img {
@@ -191,7 +207,7 @@ const pathname = new URL(Astro.request.url).pathname
 
 				&[aria-expanded="true"] + .nav__items-down {
 					margin-block-start: 10px;
-					max-height: 200px;
+					grid-template-rows: 1fr;
 				}
 			}
         }
@@ -201,6 +217,10 @@ const pathname = new URL(Astro.request.url).pathname
             border-radius: .5rem;
             text-align: center;
             background-color: var(--red-color);
+
+			&-container {
+				overflow: hidden;
+			}
         }
 
 		&__item-down {
@@ -217,7 +237,7 @@ const pathname = new URL(Astro.request.url).pathname
 	}
 
 	.active-page {
-		font-weight: bold;
+		font-weight: 700;
 		text-shadow: 1px 1px 5px var(--text-shadow);
 	}
 
@@ -230,12 +250,16 @@ const pathname = new URL(Astro.request.url).pathname
             }
 
 			&__items {
-				flex-direction: row;
-				gap: clamp(0rem, 1vw, 2.5rem);
+				grid-template-rows: 1fr;
 				position: static;
 				padding-block-end: 0;
 				max-height: min-content;
 				overflow: visible;
+				
+				&-container {
+					@include flex(clamp(0rem, 1vw, 2.5rem));
+					overflow: visible;
+				}
 			}
 
 			&__item-main, &__item-main:last-child {

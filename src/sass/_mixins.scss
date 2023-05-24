@@ -1,7 +1,7 @@
 @mixin hidden-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .5s;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .5s ease-in-out;
 }
 
 @mixin flex($gap, $direction: row, $align: center) {

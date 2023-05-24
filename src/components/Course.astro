@@ -8,8 +8,10 @@ const { courseTitle } = Astro.props
         <img src="/Website_ZChA/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć zawartość tego kursu">
     </button>
     <div class="course__content" id="course-content">
-        <div class="course__content-wrapper">
-            <slot></slot>
+        <div class="course__content-grid-row">
+            <div class="course__content-wrapper">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </div>
@@ -39,7 +41,7 @@ const { courseTitle } = Astro.props
         &__title {
             @include flex(8px);
             width: 100%;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
 
             img {
@@ -47,7 +49,7 @@ const { courseTitle } = Astro.props
             }
 
             &[aria-expanded="true"] + .course__content {
-                max-height: 1000vh;
+                grid-template-rows: 1fr;
             }
             
             &[aria-expanded="true"] img {
@@ -56,7 +58,13 @@ const { courseTitle } = Astro.props
         }
 
         &__content {
-            @include hidden-content;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .5s ease-in-out;
+
+            &-grid-row {
+                overflow: hidden;
+            }
         }
     }
 
