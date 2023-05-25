@@ -8,11 +8,16 @@
 
 [data-mode="dark"] {
     --background-color: hsl(234, 17%, 12%);
+    --header-footer-color: hsl(0, 0%, 9%);
     --main-section-color: hsl(240, 43%, 4%);
     --text-color: hsl(0, 0%, 91%);
     --text-shadow: hsl(0, 0%, 9%);
 }
 
 [data-mode="light"] {
+    --background-color: hsl(0, 0%, 98%);
+    --header-footer-color: hsl(52, 100%, 92%);
+    --main-section-color: hsl(52, 100%, 96%);
     --text-color: hsl(0, 0%, 9%);
+    --text-shadow: hsl(0 0% 9% / .2);
 }

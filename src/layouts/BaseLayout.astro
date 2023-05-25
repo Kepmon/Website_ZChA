@@ -59,6 +59,10 @@ const { mainHeading, title, centered } = Astro.props
 		background-color: var(--background-color);
 		font-size: 0.85rem;
 		line-height: 1.5;
+
+		&[data-mode="light"] h1 {
+			color: var(--red-color);
+		}
 	}
 
 	a {
@@ -127,12 +131,12 @@ const { mainHeading, title, centered } = Astro.props
 	}
 
 	.page-container {
-		@include flex(2rem, column, strech);
+		@include flex(2rem, column, stretch);
 		min-height: 100vh;
 	}
 
 	.container {
-		@include flex(16px, column, strech);
+		@include flex(16px, column, stretch);
 		margin-inline: auto;
 		padding: 1rem;
 		max-width: 1200px;

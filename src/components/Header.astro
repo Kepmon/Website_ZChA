@@ -1,3 +1,8 @@
+---
+import Pallete from './svgs/Pallete.astro'
+import Language from './svgs/Language.astro'
+---
+
 <header class="header">
 	<a href="/Website_ZChA/" class="header__logo">
 		<img
@@ -12,11 +17,11 @@
 
 	<div class="header__options">
 		<button class="header__option theme-button">
-            <img src="img/pallete.svg" alt="" class="header__option-icon">
+            <Pallete />
             <span>Zmień motyw</span>
         </button>
 		<button class="header__option language-button">
-            <img src="img/language.svg" alt="" class="header__option-icon">
+            <Language />
             <span>English version</span>
         </button>
 	</div>
@@ -57,7 +62,7 @@
     .header {
         @include flex(32px, column);
         padding: 1.5rem 2rem;
-        background-color: var(--black-color);
+        background-color: var(--header-footer-color);
 
         &__logo {
             @include flex(8px);
@@ -79,6 +84,7 @@
 
         &__option {
             @include flex(8px);
+            cursor: pointer;
 
             &-icon {
                 width: 20px;

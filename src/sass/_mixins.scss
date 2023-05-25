@@ -12,6 +12,16 @@
     gap: $gap;
 }
 
+@mixin svg-fill($className) {
+    .#{$className} {
+        fill: var(--white-color);
+    }
+
+    body[data-mode="light"] .#{$className} {
+        fill: var(--black-color);
+    }
+}
+
 @mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle) {
     @keyframes #{$name} {
         #{$start} {
