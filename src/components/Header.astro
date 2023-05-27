@@ -1,15 +1,12 @@
 ---
 import Pallete from './svgs/Pallete.astro'
 import Language from './svgs/Language.astro'
+import Flask from './svgs/Flask.astro'
 ---
 
 <header class="header">
 	<a href="/Website_ZChA/" class="header__logo">
-		<img
-			src="/Website_ZChA/img/Kolba_sama.gif"
-			alt="Obrazek do logo - wrzący roztwór w kolbie"
-			class="header__logo-img"
-		/>
+        <Flask />
 		<span class="header__logo-text">
 			Katedra Chemii Analitycznej i Metalurgii Chemicznej
 		</span>
@@ -84,7 +81,7 @@ import Language from './svgs/Language.astro'
 
         &__option {
             @include flex(8px);
-            cursor: pointer;
+            font-size: 0.8rem;
 
             &-icon {
                 width: 20px;

@@ -1,11 +1,10 @@
 ---
 import { navItems } from '../ts/navItems.ts'
-import DownArrow from './svgs/DownArrow.astro'
 
 const pathname = new URL(Astro.request.url).pathname
 ---
 
-<nav class="nav">
+<nav class="nav" aria-label="nawigacja główna">
     <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
         <span data-pointer="none">Menu</span>
         <svg width="30" height="27" fill="#fff" data-pointer="none">
