@@ -7,7 +7,7 @@ const pathname = new URL(Astro.request.url).pathname
 <nav class="nav" aria-label="nawigacja główna">
     <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
         <span data-pointer="none">Menu</span>
-        <svg width="30" height="27" fill="#fff" data-pointer="none">
+        <svg width="30" height="27" fill="var(--black-color)" data-pointer="none">
             <rect
 				x="0" y="4" width="26" height="3" rx="2" ry="2"
 				class="hamburger-bar hamburger-bar--top"
@@ -135,6 +135,7 @@ const pathname = new URL(Astro.request.url).pathname
 
         &__mobile-menu {
 			@include flex(10px);
+			color: var(--black-color);
 			
 			.hamburger-bar {
 				&--top, &--bottom {
@@ -181,6 +182,7 @@ const pathname = new URL(Astro.request.url).pathname
             position: absolute;
             inset: 100% 0 auto;
             background-color: inherit;
+			box-shadow: 0 12px 15px -6px var(--black-color);
             z-index: 10;
 
 			&-container {
@@ -213,7 +215,6 @@ const pathname = new URL(Astro.request.url).pathname
 				}
 
 				&[aria-expanded="true"] + .nav__items-down {
-					margin-block-start: 10px;
 					grid-template-rows: 1fr;
 				}
 			}
@@ -261,6 +262,7 @@ const pathname = new URL(Astro.request.url).pathname
 				position: static;
 				padding-block-end: 0;
 				max-height: min-content;
+				box-shadow: none;
 				overflow: visible;
 				
 				&-container {
@@ -288,7 +290,8 @@ const pathname = new URL(Astro.request.url).pathname
 				background-color: var(--yellow-color);
 			}
 
-			&__item-main:hover, &__item-down:hover {
+			&__item-main:hover,
+			&__item-down:hover {
 				background-color: var(--red-color);
 			}
         }
