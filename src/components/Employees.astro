@@ -12,7 +12,7 @@ const { employeeGroup } = Astro.props
     {employees[employeeGroup].map((employee) => (
         <div class="employee__item">
             <img
-                src={employee.gender === 'male' ? 'img/employee_male.png' : 'img/employee_female.png'}
+                src={employee.gender === 'male' ? '/Website_ZChA/img/employee_male.png' : '/Website_ZChA/img/employee_female.png'}
                 alt="Zdjęcie pracownika"
                 class="employee__item-photo"
             />
