@@ -22,15 +22,15 @@
     }
 }
 
-@mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle) {
+@mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle: 0) {
     @keyframes #{$name} {
         #{$start} {
-            y: $y-from;
+            transform: translateY($y-from);
             rotate: 0;
         }
 
         #{$end} {
-            y: $y-to;
+            transform: translateY($y-to);
             rotate: $rotate-angle;
         }
     }

@@ -81,6 +81,14 @@ const pathname = new URL(Astro.request.url).pathname
 	const linkParents = menuItemsWithDropdowns.map(item => item.closest('li') as HTMLLIElement)
 		
 	const setAriaForMenuButton = () => {
+		const rectTop = document.querySelector('.hamburger-bar--top') as SVGElement
+		const rectBottom = document.querySelector('.hamburger-bar--bottom') as SVGElement
+
+		if (menuButton.getAttribute('aria-expanded') === 'true') {
+			rectTop.classList.add('animation-top')
+			rectBottom.classList.add('animation-bottom')
+		}
+
 		setAriaValues(menuButton)
 		closeOpenedDropdowns()
 	}
@@ -122,10 +130,14 @@ const pathname = new URL(Astro.request.url).pathname
 
 <style lang="scss">
 	@use '../sass/mixins' as *;
-	@include animation-mixin(rotate-right, 0%, 100%, 4, 13, 45deg);
-	@include animation-mixin(rotate-left, 0%, 100%, 20, 10, -45deg);
-	@include animation-mixin(rotate-right-back, 100%, 0%, 4, 13, 45deg);
-	@include animation-mixin(rotate-left-back, 100%, 0%, 20, 10, -45deg);
+	@include animation-mixin(center-from-top, 0%, 100%, 0%, 39%);
+	@include animation-mixin(center-from-bottom, 0%, 100%, 100%, -39%);
+	@include animation-mixin(rotate-right, 0%, 100%, 39%, 39%, 45deg);
+	@include animation-mixin(rotate-left, 0%, 100%, -39%, -39%, -45deg);
+	@include animation-mixin(rotate-back-right, 100%, 0%, 39%, 39%, 45deg);
+	@include animation-mixin(rotate-back-left, 100%, 0%, -39%, -39%, -45deg);
+	@include animation-mixin(back-to-top, 100%, 0%, 0%, 39%);
+	@include animation-mixin(back-to-bottom, 100%, 0%, 0%, -39%);
 
     .nav {
 		@include flex(0);
@@ -143,18 +155,6 @@ const pathname = new URL(Astro.request.url).pathname
 				}
 			}
 
-			:active {
-				.hamburger-bar {
-					&--top {
-						animation: rotate-right-back .5s forwards;
-					}
-		
-					&--bottom {
-						animation: rotate-left-back .5s forwards;
-					}
-				}
-			}
-
 			&[aria-expanded="true"] {
 				.hamburger-bar {
 					&--middle {
@@ -162,11 +162,17 @@ const pathname = new URL(Astro.request.url).pathname
 					}
 	
 					&--top {
-						animation: rotate-right .5s forwards;
+						animation:
+							center-from-top .2s forwards,
+							rotate-right .3s .2s forwards
+						;
 					}
 	
 					&--bottom {
-						animation: rotate-left .5s forwards;
+						animation:
+							center-from-bottom .2s forwards,
+							rotate-left .3s .2s forwards
+						;
 					}
 				}
 			}
@@ -247,6 +253,20 @@ const pathname = new URL(Astro.request.url).pathname
 
 	.active-page {
 		font-weight: 700;
+	}
+
+	.animation-top {
+		animation:
+			rotate-back-right .3s forwards,
+			back-to-top .2s .3s forwards
+		;
+	}
+	
+	.animation-bottom {
+		animation:
+			rotate-back-left .3s forwards,
+			back-to-bottom .2s .3s forwards
+		;
 	}
 
     @media (width > 768px) {
