@@ -4,10 +4,10 @@ import { navItems } from '../ts/navItems.ts'
 const pathname = new URL(Astro.request.url).pathname
 ---
 
-<nav class="nav">
+<nav class="nav" aria-label="nawigacja główna">
     <button class="nav__mobile-menu" aria-controls="nav-items" aria-expanded="false">
         <span data-pointer="none">Menu</span>
-        <svg width="30" height="27" fill="#fff" data-pointer="none">
+        <svg width="30" height="27" fill="var(--black-color)" data-pointer="none">
             <rect
 				x="0" y="4" width="26" height="3" rx="2" ry="2"
 				class="hamburger-bar hamburger-bar--top"
@@ -29,50 +29,68 @@ const pathname = new URL(Astro.request.url).pathname
         </svg>
     </button>
 	<ul class="nav__items" id="nav-items">
-		{navItems.map((item) => (
-			<li class="nav__item-main">
-				<a
-					class="nav__item-main-link"
-					class:list={[{
-						'nav__item-main-link--with-dropdown': item.subitems,
-						'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
-					}]}
-					href={item.url ? item.url : '#'}
-					aria-controls={item.subitems ? item.id : undefined}
-					aria-expanded={item.subitems ? 'false' : undefined}
-				>
-					{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
-					{item.subitems
-						&& <img
-							src="/Website_ZChA/img/down-arrow.svg"
-							alt="Kliknij tutaj żeby rozwinąć więcej opcji"
-							data-pointer="none"
-						/>}
-				</a>
-				{item.subitems &&
-					<ul class="nav__items-down" id={item.id}>
-						{item.subitems.map((subitem) => (
-							<li class="nav__item-down">
-								<a class="nav__item-down-link" href={subitem.url}>{subitem.name}</a>
-							</li>
-						))}
-					</ul>
-				}
-			</li>
-		))}
+		<div class="nav__items-container">
+			{navItems.map((item) => (
+				<li class="nav__item-main">
+					<a
+						class="nav__item-main-link"
+						class:list={[{
+							'nav__item-main-link--with-dropdown': item.subitems,
+							'active-page': pathname === item.url || item.subitems?.some((subitem) => pathname === subitem.url)
+						}]}
+						href={item.url ? item.url : '#'}
+						aria-controls={item.subitems ? item.id : undefined}
+						aria-expanded={item.subitems ? 'false' : undefined}
+					>
+						{item.subitems ? <span data-pointer="none">{item.name}</span> : item.name}
+						{item.subitems && 
+							<svg
+								width="12px"
+								height="12px"
+								viewBox="0 0 1024 1024"
+								class="icon"
+								version="1.1"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
+							</svg>}
+						</a>
+					{item.subitems &&
+						<ul class="nav__items-down" id={item.id}>
+							<div class="nav__items-down-container">
+								{item.subitems.map((subitem) => (
+									<li class="nav__item-down">
+										<a class="nav__item-down-link" href={subitem.url}>{subitem.name}</a>
+									</li>
+								))}
+							</div>
+						</ul>
+					}
+				</li>
+			))}
+		</div>
 	</ul>
 </nav>
 
 <script>
 	import { setAriaValues } from '../ts/ariaValues'
 
-	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLDivElement
+	const menuButton = document.querySelector('.nav__mobile-menu') as HTMLButtonElement
 	const menuItemsWithDropdowns =
 		[...document.querySelectorAll('.nav__item-main-link[aria-expanded]')] as HTMLAnchorElement[]
 	const linkParents = menuItemsWithDropdowns.map(item => item.closest('li') as HTMLLIElement)
 		
 	const setAriaForMenuButton = () => {
+		const rectTop = document.querySelector('.hamburger-bar--top') as SVGElement
+		const rectBottom = document.querySelector('.hamburger-bar--bottom') as SVGElement
+
+		if (menuButton.getAttribute('aria-expanded') === 'true') {
+			rectTop.classList.add('animation-top')
+			rectBottom.classList.add('animation-bottom')
+		}
+
 		setAriaValues(menuButton)
+		closeOpenedDropdowns()
 	}
 
 	const setAriaForDropdowns = (activeParent: HTMLLIElement) => {
@@ -85,7 +103,13 @@ const pathname = new URL(Astro.request.url).pathname
 		})
 	}
 
-	const closeItemOnClickingOutside = (e: Event, items: [...HTMLAnchorElement[], HTMLDivElement]) => {
+	const closeOpenedDropdowns = () => {
+		menuItemsWithDropdowns.forEach((item) => {
+			item.setAttribute('aria-expanded', 'false')
+		})
+	}
+
+	const closeItemOnClickingOutside = (e: Event, items: [...HTMLAnchorElement[], HTMLButtonElement]) => {
 		const isOneOfItemsClicked = items.some((item) => e.target === item)
 		
 		if (isOneOfItemsClicked) return
@@ -106,35 +130,28 @@ const pathname = new URL(Astro.request.url).pathname
 
 <style lang="scss">
 	@use '../sass/mixins' as *;
-	@include animation-mixin(rotate-right, 0%, 100%, 4, 13, 45deg);
-	@include animation-mixin(rotate-left, 0%, 100%, 20, 10, -45deg);
-	@include animation-mixin(rotate-right-back, 100%, 0%, 4, 13, 45deg);
-	@include animation-mixin(rotate-left-back, 100%, 0%, 20, 10, -45deg);
+	@include animation-mixin(center-from-top, 0%, 100%, 0%, 39%);
+	@include animation-mixin(center-from-bottom, 0%, 100%, 100%, -39%);
+	@include animation-mixin(rotate-right, 0%, 100%, 39%, 39%, 45deg);
+	@include animation-mixin(rotate-left, 0%, 100%, -39%, -39%, -45deg);
+	@include animation-mixin(rotate-back-right, 100%, 0%, 39%, 39%, 45deg);
+	@include animation-mixin(rotate-back-left, 100%, 0%, -39%, -39%, -45deg);
+	@include animation-mixin(back-to-top, 100%, 0%, 0%, 39%);
+	@include animation-mixin(back-to-bottom, 100%, 0%, 0%, -39%);
 
     .nav {
 		@include flex(0);
         position: relative;
         padding: 1rem;
-        background-color: var(--main-color);
+        background-color: var(--yellow-color);
 
         &__mobile-menu {
 			@include flex(10px);
+			color: var(--black-color);
 			
 			.hamburger-bar {
 				&--top, &--bottom {
 					transform-origin: center;
-				}
-			}
-
-			:active {
-				.hamburger-bar {
-					&--top {
-						animation: rotate-right-back .5s forwards;
-					}
-		
-					&--bottom {
-						animation: rotate-left-back .5s forwards;
-					}
 				}
 			}
 
@@ -145,53 +162,66 @@ const pathname = new URL(Astro.request.url).pathname
 					}
 	
 					&--top {
-						animation: rotate-right .5s forwards;
+						animation:
+							center-from-top .2s forwards,
+							rotate-right .3s .2s forwards
+						;
 					}
 	
 					&--bottom {
-						animation: rotate-left .5s forwards;
+						animation:
+							center-from-bottom .2s forwards,
+							rotate-left .3s .2s forwards
+						;
 					}
 				}
 			}
 
 			&[aria-expanded="true"] + .nav__items {
-				max-height: 500px;
+				grid-template-rows: 1fr;
 			}
         }
 
         &__items {
-			@include flex(0, column);
 			@include hidden-content;
+			justify-content: center;
             position: absolute;
             inset: 100% 0 auto;
             background-color: inherit;
+			box-shadow: 0 12px 15px -6px var(--black-color);
             z-index: 10;
+
+			&-container {
+				overflow: hidden;
+			}
         }
 
         &__item-main {
+			text-align: center;
 			cursor: pointer;
 
-			img {
+			svg {
+				fill: var(--black-color);
 				transition: rotate .5s;
 			}
 
 			&-link {
 				display: block;
 				padding-block: 8px;
+				color: var(--black-color);
 
 				&--with-dropdown {
 					@include flex(5px);
 				}
 				
 				&[aria-expanded="true"] {
-					img {
+					svg {
 						rotate: 180deg;
 					}
 				}
 
 				&[aria-expanded="true"] + .nav__items-down {
-					margin-block-start: 10px;
-					max-height: 200px;
+					grid-template-rows: 1fr;
 				}
 			}
         }
@@ -201,6 +231,11 @@ const pathname = new URL(Astro.request.url).pathname
             border-radius: .5rem;
             text-align: center;
             background-color: var(--red-color);
+			color: var(--black-color);
+
+			&-container {
+				overflow: hidden;
+			}
         }
 
 		&__item-down {
@@ -217,8 +252,21 @@ const pathname = new URL(Astro.request.url).pathname
 	}
 
 	.active-page {
-		font-weight: bold;
-		text-shadow: 1px 1px 5px var(--text-shadow);
+		font-weight: 700;
+	}
+
+	.animation-top {
+		animation:
+			rotate-back-right .3s forwards,
+			back-to-top .2s .3s forwards
+		;
+	}
+	
+	.animation-bottom {
+		animation:
+			rotate-back-left .3s forwards,
+			back-to-bottom .2s .3s forwards
+		;
 	}
 
     @media (width > 768px) {
@@ -230,12 +278,17 @@ const pathname = new URL(Astro.request.url).pathname
             }
 
 			&__items {
-				flex-direction: row;
-				gap: clamp(0rem, 1vw, 2.5rem);
+				grid-template-rows: 1fr;
 				position: static;
 				padding-block-end: 0;
 				max-height: min-content;
+				box-shadow: none;
 				overflow: visible;
+				
+				&-container {
+					@include flex(clamp(0rem, 1vw, 2.5rem));
+					overflow: visible;
+				}
 			}
 
 			&__item-main, &__item-main:last-child {
@@ -254,10 +307,11 @@ const pathname = new URL(Astro.request.url).pathname
 				position: absolute;
 				inset: 100% -50% auto;
 				margin-block: 5px;
-				background-color: var(--main-color);
+				background-color: var(--yellow-color);
 			}
 
-			&__item-main:hover, &__item-down:hover {
+			&__item-main:hover,
+			&__item-down:hover {
 				background-color: var(--red-color);
 			}
         }

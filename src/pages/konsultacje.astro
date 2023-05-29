@@ -37,7 +37,8 @@ import { officeHours } from '../ts/officeHours.ts'
     .employee {
         &__table {
             margin: 0 auto;
-            background-color: var(--table-color);
+            background-color: var(--yellow-color);
+            color: var(--black-color);
 
             &-th {
                 display: none;
@@ -47,7 +48,7 @@ import { officeHours } from '../ts/officeHours.ts'
             &-td {
                 display: block;
                 padding: 4px 8px;
-                font-weight: bold;
+                font-weight: 700;
                 text-align: center;
             }
 
@@ -75,7 +76,6 @@ import { officeHours } from '../ts/officeHours.ts'
 
             &__table {
                 margin: 0 auto;
-                background-color: var(--table-color);
 
                 &-th, &-td {
                     display: revert;

@@ -5,11 +5,22 @@ const { courseTitle } = Astro.props
 <div class="course">
     <button class="course__title" aria-expanded="false" aria-controls="course-content">
         <span>{courseTitle}</span>
-        <img src="/Website_ZChA/img/down-arrow.svg" alt="Kliknij tutaj żeby rozwinąć zawartość tego kursu">
+        <svg
+            width="12px"
+            height="12px"
+            viewBox="0 0 1024 1024"
+            class="icon"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
+        </svg>
     </button>
     <div class="course__content" id="course-content">
-        <div class="course__content-wrapper">
-            <slot></slot>
+        <div class="course__content-grid-row">
+            <div class="course__content-wrapper">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </div>
@@ -31,32 +42,38 @@ const { courseTitle } = Astro.props
         &__title,
 		&__content-wrapper {
             padding: .8rem;
-            background-color: var(--main-color);
-            border: 5px ridge var(--red-color);
+            background-color: var(--yellow-color);
+            color: var(--black-color);
+            border: 4px ridge var(--red-color);
 			border-radius: 10px;
 		}
 
         &__title {
             @include flex(8px);
             width: 100%;
-            font-weight: bold;
-            cursor: pointer;
+            font-weight: 700;
 
-            img {
+            svg {
                 transition: rotate .5s;
             }
 
             &[aria-expanded="true"] + .course__content {
-                max-height: 1000vh;
+                grid-template-rows: 1fr;
             }
             
-            &[aria-expanded="true"] img {
+            &[aria-expanded="true"] svg {
                 rotate: 180deg;
             }
         }
 
         &__content {
-            @include hidden-content;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .5s ease-in-out;
+
+            &-grid-row {
+                overflow: hidden;
+            }
         }
     }
 

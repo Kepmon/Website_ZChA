@@ -1,7 +1,7 @@
 @mixin hidden-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .5s;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .5s ease-in-out;
 }
 
 @mixin flex($gap, $direction: row, $align: center) {
@@ -12,15 +12,25 @@
     gap: $gap;
 }
 
-@mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle) {
+@mixin svg-fill($className) {
+    .#{$className} {
+        fill: var(--white-color);
+    }
+
+    body[data-mode="light"] .#{$className} {
+        fill: var(--black-color);
+    }
+}
+
+@mixin animation-mixin($name, $start, $end, $y-from, $y-to, $rotate-angle: 0) {
     @keyframes #{$name} {
         #{$start} {
-            y: $y-from;
+            transform: translateY($y-from);
             rotate: 0;
         }
 
         #{$end} {
-            y: $y-to;
+            transform: translateY($y-to);
             rotate: $rotate-angle;
         }
     }
