@@ -1,4 +1,6 @@
 ---
+import { navItems } from '../ts/navItems.ts'
+
 const year = new Date().getFullYear()
 ---
 
@@ -36,17 +38,14 @@ const year = new Date().getFullYear()
         </button>
         <nav class="footer__nav-links" id="footer-nav" aria-label="nawigacja na dole strony">
             <ul>
-                <li><a href="/Website_ZChA/">Strona główna</a></li>
-                <li><a href="/Website_ZChA/dydaktyka_I_stopien">Dydaktyka - Studia inżynierskie I stopnia</a></li>
-                <li><a href="/Website_ZChA/dydaktyka_niestacjonarne">Dydaktyka - Studia inżynierskie niestacjonarne</a></li>
-                <li><a href="/Website_ZChA/dydaktyka_II_stopien">Dydaktyka - Studia magisterskie II stopnia</a></li>
-                <li><a href="/Website_ZChA/specjalnosc">Specjalność</a></li>
-                <li><a href="/Website_ZChA/zespol_chemii_analitycznej">Pracownicy - Zespół Chemii Analitycznej</a></li>
-                <li><a href="/Website_ZChA/zespol_metalurgii">Pracownicy - Zespół Metalurgii Chemicznej</a></li>
-                <li><a href="/Website_ZChA/doktoranci">Pracownicy - Doktoranci</a></li>
-                <li><a href="/Website_ZChA/konsultacje">Pracownicy - Konsultacje</a></li>
-                <li><a href="/Website_ZChA/badania">Badania</a></li>
-                <li><a href="/Website_ZChA/laboratoria">Laboratoria</a></li>
+                {navItems.map((item) => {
+                    if (item.subitems) {
+                        return item.subitems.map((subitem) => (
+                            <li>{subitem.name}</li>
+                        ))
+                    }
+                    return <li>{item.name}</li>
+                })}
             </ul>
         </nav>
     </div>

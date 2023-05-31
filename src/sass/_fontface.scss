@@ -1,11 +1,15 @@
 @font-face {
     font-family: 'Lato';
     font-weight: 400;
-    src: url('../fonts/lato-regular.woff2') format('woff2');
+    src: url('../Website_ZChA/fonts/lato-regular.woff2') format('woff2');
+    unicode-range: U+100-17F;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Lato';
     font-weight: 700;
-    src: url('../fonts/lato-bold.woff2') format('woff2');
+    src: url('../Website_ZChA/fonts/lato-bold.woff2') format('woff2');
+    unicode-range: U+100-17F;
+    font-display: swap;
 }
