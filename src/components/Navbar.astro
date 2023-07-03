@@ -49,14 +49,14 @@ const pathname = new URL(Astro.request.url).pathname
 								height="12px"
 								viewBox="0 0 1024 1024"
 								class="icon"
-								version="1.1"
-								xmlns="http://www.w3.org/2000/svg"
+								data-pointer="none"
 							>
 								<path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
-							</svg>}
-						</a>
+							</svg>
+						}
+					</a>
 					{item.subitems &&
-						<ul class="nav__items-down" id={item.id}>
+						<ul class="nav__items-down" id={item.id} aria-hidden="true">
 							<div class="nav__items-down-container">
 								{item.subitems.map((subitem) => (
 									<li class="nav__item-down">
@@ -79,6 +79,21 @@ const pathname = new URL(Astro.request.url).pathname
 	const menuItemsWithDropdowns =
 		[...document.querySelectorAll('.nav__item-main-link[aria-expanded]')] as HTMLAnchorElement[]
 	const linkParents = menuItemsWithDropdowns.map(item => item.closest('li') as HTMLLIElement)
+	const navItemsUl = document.querySelector('.nav__items') as HTMLUListElement
+	const activePage = document.querySelector('.active-page')
+
+	const observer = new ResizeObserver((entries) => {
+		if (window.innerWidth > 768 && entries[0].target === navItemsUl) {
+			entries[0].target.removeAttribute('aria-hidden')
+			return
+		}
+
+		entries[0].target.setAttribute('aria-hidden', 'true')
+	})
+	observer.observe(navItemsUl)
+	linkParents.forEach((parent) => {
+		observer.observe(parent.nextElementSibling as HTMLUListElement)
+	})
 		
 	const setAriaForMenuButton = () => {
 		const rectTop = document.querySelector('.hamburger-bar--top') as SVGElement
@@ -89,7 +104,7 @@ const pathname = new URL(Astro.request.url).pathname
 			rectBottom.classList.add('animation-bottom')
 		}
 
-		setAriaValues(menuButton)
+		setAriaValues(menuButton, observer)
 		closeOpenedDropdowns()
 	}
 
@@ -99,7 +114,7 @@ const pathname = new URL(Astro.request.url).pathname
 				item.setAttribute('aria-expanded', 'false')
 				return
 			}
-			setAriaValues(item)
+			setAriaValues(item, observer)
 		})
 	}
 
@@ -125,6 +140,9 @@ const pathname = new URL(Astro.request.url).pathname
 	menuButton.addEventListener('click', setAriaForMenuButton)
 	window.addEventListener('click', (e: Event) =>
 		closeItemOnClickingOutside(e, [...menuItemsWithDropdowns, menuButton]))
+	window.addEventListener('DOMContentLoaded', () => {
+		activePage?.setAttribute('aria-current', 'page')
+	})
 </script>
 
 
